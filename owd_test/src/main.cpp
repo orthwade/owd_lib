@@ -6,8 +6,8 @@
 
 //#pragma comment(lib, "owd_strings.lib")
 
-#include "../../include/owd_strings.h"
-
+#include <owd_strings.h>
+//#include <owd_>
 int32_t main()
 {
 	static auto setmode_result = _setmode(_fileno(stdout), _O_WTEXT);
@@ -24,6 +24,6 @@ int32_t main()
 	std::wcout << convert_to_unicode << '\n';
 	std::wcout << convert_to_utf_8.c_str() << '\n';
 	//std::wcout << wstring_ << '\n';
-
+//	auto time = owd::
 	return 0;
 }

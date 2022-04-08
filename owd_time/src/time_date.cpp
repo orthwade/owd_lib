@@ -1,5 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "time_date.h"
+#include <chrono>
+#include <time.h>
+#include <string>
 
 namespace owd_lib
 {

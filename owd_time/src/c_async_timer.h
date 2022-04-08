@@ -1,11 +1,11 @@
 #pragma once
 #include <atomic>
-#include "misc_defines.h"
+#include <thread>
 
 namespace owd_lib
 {
 		
-	class c_async_timer
+	class c_async_timer_lib
 	{
 		enum class enm_state
 		{
@@ -13,10 +13,10 @@ namespace owd_lib
 			done
 		};
 	public:
-		c_async_timer();
-		c_async_timer(uint64_t period_mcs);
+		c_async_timer_lib();
+		c_async_timer_lib(uint64_t period_mcs);
 
-		~c_async_timer();
+		~c_async_timer_lib();
 		void init();
 		void init(uint64_t period_mcs);
 

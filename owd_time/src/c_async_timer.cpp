@@ -2,49 +2,50 @@
 
 namespace owd_lib
 {
-    c_async_timer::c_async_timer()
+    c_async_timer_lib::c_async_timer_lib()
     {
     }
-    c_async_timer::c_async_timer(uint64_t period_mcs)
+    c_async_timer_lib::c_async_timer_lib(uint64_t period_mcs)
     {
         //init(period_mcs);
         set_period(period_mcs);
     }
-    c_async_timer::~c_async_timer()
+    c_async_timer_lib::~c_async_timer_lib()
     {
         terminate();
     }
-    void c_async_timer::init()
+    void c_async_timer_lib::init()
     {
         terminate();
         m_thread_exists = true;
-        m_thread() = std::thread(&c_async_timer::do_, this);
+        m_thread() = std::thread(&c_async_timer_lib::do_, this);
     }
-    void c_async_timer::init(uint64_t period_mcs)
+    void c_async_timer_lib::init(uint64_t period_mcs)
     {
         terminate();
         m_thread_exists = true;
         set_period(period_mcs);
-        m_thread() = std::thread(&c_async_timer::do_, this);
+        m_thread() = std::thread(&c_async_timer_lib::do_, this);
     }
-    void c_async_timer::terminate()
+    void c_async_timer_lib::terminate()
     {
+        stop();
         m_thread_exists = false;
         if (m_thread().joinable())
         {
             m_thread().join();
         }
     }
-    void c_async_timer::start(uint64_t period_mcs)
+    void c_async_timer_lib::start(uint64_t period_mcs)
     {
         set_period(period_mcs);
         m_state = enm_state::waiting;
     }
-    void c_async_timer::start()
+    void c_async_timer_lib::start()
     {
         m_state = enm_state::waiting;
     }
-    void c_async_timer::do_()
+    void c_async_timer_lib::do_()
     {
         while (m_thread_exists)
         {
@@ -67,18 +68,18 @@ namespace owd_lib
             }
         }
     }
-    void c_async_timer::wait()
+    void c_async_timer_lib::wait()
     {
         while (m_state == enm_state::waiting)
         {
 
         }
     }
-    void c_async_timer::stop()
+    void c_async_timer_lib::stop()
     {
         m_state = enm_state::done;
     }
-    void c_async_timer::set_period(uint64_t period_mcs)
+    void c_async_timer_lib::set_period(uint64_t period_mcs)
     {
         m_period_mcs.store(period_mcs);
     }

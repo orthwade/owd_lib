@@ -20,6 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\owd_time.h" />
+    <ClInclude Include="src\c_async_timer.h" />
+    <ClInclude Include="src\c_sleep_for.h" />
+    <ClInclude Include="src\time_date.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\owd_time.cpp" />
+    <ClCompile Include="src\c_async_timer.cpp" />
+    <ClCompile Include="src\c_sleep_for.cpp" />
+    <ClCompile Include="src\time_date.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
