@@ -38,13 +38,11 @@ owd_lib::c_async_timer_lib* async_timer_lib(void* data)
     return reinterpret_cast<owd_lib::c_async_timer_lib*>(data);
 }
 
-void owd::c_async_timer::start(size_t period_ms)
+void owd::c_async_timer::start(size_t period_mcs)
 {
-    terminate();
-    m_data = new owd_lib::c_async_timer_lib();
+    //terminate();
     auto t_ = async_timer_lib(m_data);
-    t_->init(period_ms);
-    t_->start();
+    t_->start(period_mcs);
 }
 
 void owd::c_async_timer::wait()
@@ -82,8 +80,10 @@ void owd::c_async_timer::terminate()
 
 owd::c_async_timer::c_async_timer()
     :
-    m_data(nullptr)
+    m_data(new owd_lib::c_async_timer_lib())
 {
+    auto t_ = async_timer_lib(m_data);
+    t_->init();
 }
 
 owd::c_async_timer::~c_async_timer()

@@ -7,6 +7,8 @@
 //#pragma comment(lib, "owd_strings.lib")
 
 #include <owd_strings.h>
+#include <owd_time.h>
+
 //#include <owd_>
 int32_t main()
 {
@@ -23,6 +25,18 @@ int32_t main()
 
 	std::wcout << convert_to_unicode << '\n';
 	std::wcout << convert_to_utf_8.c_str() << '\n';
+
+	std::wcout << owd::time_date().c_str() << '\n';
+
+	auto timer = owd::c_async_timer();
+
+	for (int i = 0; i < 10; ++i)
+	{
+		timer.wait();
+		std::wcout << "Timer: " << i << '\n';
+		timer.start(1000000);
+
+	}
 	//std::wcout << wstring_ << '\n';
 //	auto time = owd::
 	return 0;

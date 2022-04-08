@@ -18,22 +18,22 @@ namespace owd_lib
     {
         terminate();
         m_thread_exists = true;
-        m_thread() = std::thread(&c_async_timer_lib::do_, this);
+        m_thread = std::thread(&c_async_timer_lib::do_, this);
     }
     void c_async_timer_lib::init(uint64_t period_mcs)
     {
         terminate();
         m_thread_exists = true;
         set_period(period_mcs);
-        m_thread() = std::thread(&c_async_timer_lib::do_, this);
+        m_thread = std::thread(&c_async_timer_lib::do_, this);
     }
     void c_async_timer_lib::terminate()
     {
         stop();
         m_thread_exists = false;
-        if (m_thread().joinable())
+        if (m_thread.joinable())
         {
-            m_thread().join();
+            m_thread.join();
         }
     }
     void c_async_timer_lib::start(uint64_t period_mcs)

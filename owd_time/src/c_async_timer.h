@@ -36,7 +36,7 @@ namespace owd_lib
 
 		std::atomic_bool m_thread_exists = true;
 
-		c_thread m_thread{};
+		std::thread m_thread{};
 
 		std::atomic<uint64_t> m_period_mcs{};
 
