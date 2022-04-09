@@ -73,7 +73,7 @@ void owd::c_async_timer::terminate()
     {
         auto t_ = async_timer_lib(m_data);
         t_->terminate();
-        delete m_data;
+        delete async_timer_lib(m_data);
         m_data = nullptr;
     }
 }

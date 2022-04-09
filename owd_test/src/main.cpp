@@ -8,8 +8,9 @@
 
 #include <owd_strings.h>
 #include <owd_time.h>
+#include <owd_time.h>
+#include <owd_debug.h>
 
-//#include <owd_>
 int32_t main()
 {
 	static auto setmode_result = _setmode(_fileno(stdout), _O_WTEXT);
@@ -34,9 +35,11 @@ int32_t main()
 	{
 		timer.wait();
 		std::wcout << "Timer: " << i << '\n';
-		timer.start(1000000);
-
+		//timer.start(1000000);
 	}
+	owd::c_logger logger{ L"Test_logger" };
+	logger.disable_global_mode_override();
+	logger << "Test message\n";
 	//std::wcout << wstring_ << '\n';
 //	auto time = owd::
 	return 0;

@@ -154,6 +154,9 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\owd_debug\owd_debug.vcxproj">
+      <Project>{decf197b-b0e1-4d2c-9b0f-8f9a66bac02c}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\owd_strings\owd_strings.vcxproj">
       <Project>{21786f17-fefb-4b31-87d4-548eef0f98a2}</Project>
     </ProjectReference>

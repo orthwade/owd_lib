@@ -1,19 +1,21 @@
 #include "logger.h"
+#include <owd_strings.h>
+#include <owd_time.h>
+#include <owd_filesystem.h>
 
 namespace owd_lib
 {
     static auto setmode_result = _setmode(_fileno(stdout), _O_WTEXT);
 
-    bool c_logger::log_mode_override_enabled = true;
-    enm_log_mode c_logger::log_mode_override = enm_log_mode::none;
+    bool c_logger_lib::log_mode_override_enabled = true;
+    enm_log_mode c_logger_lib::log_mode_override = enm_log_mode::none;
 
-    c_logger::c_logger()
+    c_logger_lib::c_logger_lib()
         :
-        m_curr_dir(),
-        m_curr_dir_str(m_curr_dir()),
+        m_curr_dir_str(owd::current_folder()),
         m_logs_folder_path(m_curr_dir_str + L"/output/logs/"),
-        m_time_date_str(c_convert_strings::unicode(m_time_date.time_date())),
-        m_date_str(m_time_date_str.substr(0, 9))
+        m_time_date_str(owd::unicode(owd::time_date())),
+        m_date_str(m_time_date_str.substr(0, 10))
         //m_log_file_path(m_logs_folder_path + m_date_str + L'/' + m_name + L".txt"),
         //m_common_log_file_path(m_logs_folder_path + m_date_str + L"/common_log.txt")
     {
@@ -27,14 +29,13 @@ namespace owd_lib
         std::filesystem::create_directory(std::wstring(L"output/logs/") + m_date_str);
     }
 
-    c_logger::c_logger(std::wstring_view name)
+    c_logger_lib::c_logger_lib(std::wstring_view name)
         :
         m_name(name),
-        m_curr_dir(),
-        m_curr_dir_str(m_curr_dir()),
+        m_curr_dir_str(owd::current_folder()),
         m_logs_folder_path(m_curr_dir_str + L"/output/logs/"),
-        m_time_date_str(c_convert_strings::unicode(m_time_date.time_date())),
-        m_date_str(m_time_date_str.substr(0, 9))
+        m_time_date_str(owd::unicode(owd::time_date())),
+        m_date_str(m_time_date_str.substr(0, 10))
         //m_log_file_path(m_logs_folder_path + m_date_str + L'/' + m_name + L".txt"),
         //m_common_log_file_path(m_logs_folder_path + m_date_str + L"/common_log.txt")
     {
@@ -48,15 +49,14 @@ namespace owd_lib
         std::filesystem::create_directory(std::wstring(L"output/logs/") + m_date_str);
     }
 
-    c_logger::c_logger(std::wstring_view name, owd_lib::enm_log_mode mode)
+    c_logger_lib::c_logger_lib(std::wstring_view name, owd_lib::enm_log_mode mode)
         :
         m_name(name),
         //m_mode(mode),
-        m_curr_dir(),
-        m_curr_dir_str(m_curr_dir()),
+        m_curr_dir_str(owd::current_folder()),
         m_logs_folder_path(m_curr_dir_str + L"/output/logs/"),
-        m_time_date_str(c_convert_strings::unicode(m_time_date.time_date())),
-        m_date_str(m_time_date_str.substr(0, 9))
+        m_time_date_str(owd::unicode(owd::time_date())),
+        m_date_str(m_time_date_str.substr(0, 10))
         //m_log_file_path(m_logs_folder_path + m_date_str + L'/' + m_name + L".txt"),
         //m_common_log_file_path(m_logs_folder_path + m_date_str + L"/common_log.txt")
     {
@@ -70,16 +70,16 @@ namespace owd_lib
         std::filesystem::create_directory(std::wstring(L"output/logs/") + m_date_str);
     }
 
-    c_logger::~c_logger()
+    c_logger_lib::~c_logger_lib()
     {
     }
 
-    c_logger::c_logger(const c_logger& other)
+    c_logger_lib::c_logger_lib(const c_logger_lib& other)
     {
         *this = other;
     }
 
-    c_logger& c_logger::operator=(const c_logger& other)
+    c_logger_lib& c_logger_lib::operator=(const c_logger_lib& other)
     {
         if (this != &other)
         {
@@ -101,12 +101,12 @@ namespace owd_lib
         return *this;
     }
 
-    void c_logger::set_name(std::wstring_view name)
+    void c_logger_lib::set_name(std::wstring_view name)
     {
         m_name = name;
     }
 
-    c_logger& c_logger::operator<<(uint8_t input)
+    c_logger_lib& c_logger_lib::operator<<(uint8_t input)
     {
         auto mode = m_mode;
 
@@ -128,7 +128,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(uint16_t input)
+    c_logger_lib& c_logger_lib::operator<<(uint16_t input)
     {
         auto mode = m_mode;
 
@@ -150,7 +150,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(uint32_t input)
+    c_logger_lib& c_logger_lib::operator<<(uint32_t input)
     {
         auto mode = m_mode;
 
@@ -172,7 +172,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(uint64_t input)
+    c_logger_lib& c_logger_lib::operator<<(uint64_t input)
     {
         auto mode = m_mode;
 
@@ -194,7 +194,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(int8_t input)
+    c_logger_lib& c_logger_lib::operator<<(int8_t input)
     {
         auto mode = m_mode;
 
@@ -216,7 +216,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(int16_t input)
+    c_logger_lib& c_logger_lib::operator<<(int16_t input)
     {
         auto mode = m_mode;
         m_mtx.lock();
@@ -237,7 +237,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(int32_t input)
+    c_logger_lib& c_logger_lib::operator<<(int32_t input)
     {
         auto mode = m_mode;
         m_mtx.lock();
@@ -258,7 +258,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(int64_t input)
+    c_logger_lib& c_logger_lib::operator<<(int64_t input)
     {
         auto mode = m_mode;
         m_mtx.lock();
@@ -279,7 +279,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(float input)
+    c_logger_lib& c_logger_lib::operator<<(float input)
     {
         auto mode = m_mode;
         m_mtx.lock();
@@ -300,7 +300,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(double input)
+    c_logger_lib& c_logger_lib::operator<<(double input)
     {
         auto mode = m_mode;
         m_mtx.lock();
@@ -321,7 +321,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(const char* input)
+    c_logger_lib& c_logger_lib::operator<<(const char* input)
     {
         auto mode = m_mode;
         m_mtx.lock();
@@ -338,7 +338,7 @@ namespace owd_lib
             // "----Getting instance START----\n"
             //std::string string_buffer(input);
 
-            std::wstring wstring_buffer = c_convert_strings::unicode(input);
+            std::wstring wstring_buffer = owd::unicode(input);
 
             //std::wstring wstring_buffer = std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>{}.from_bytes(string_buffer);
 
@@ -363,7 +363,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(std::string_view input)
+    c_logger_lib& c_logger_lib::operator<<(std::string_view input)
     {
         auto mode = m_mode;
         m_mtx.lock();
@@ -379,7 +379,7 @@ namespace owd_lib
         {
             //std::string string_buffer(input);
 
-            std::wstring wstring_buffer = c_convert_strings::unicode(input);
+            std::wstring wstring_buffer = owd::unicode(input);
 
             //c_convert_strings::utf_8_to_unicode(string_buffer, wstring_buffer);
 
@@ -401,7 +401,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(std::wstring_view input)
+    c_logger_lib& c_logger_lib::operator<<(std::wstring_view input)
     {
         auto mode = m_mode;
         m_mtx.lock();
@@ -435,7 +435,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(char c)
+    c_logger_lib& c_logger_lib::operator<<(char c)
     {
         auto mode = m_mode;
         m_mtx.lock();
@@ -462,7 +462,7 @@ namespace owd_lib
         return *this;
     }
 
-    c_logger& c_logger::operator<<(wchar_t c)
+    c_logger_lib& c_logger_lib::operator<<(wchar_t c)
     {
         auto mode = m_mode;
         
@@ -489,7 +489,7 @@ namespace owd_lib
         return *this;
     }
 
-    void c_logger::set_mode(enm_log_mode mode)
+    void c_logger_lib::set_mode(enm_log_mode mode)
     {
         if (global_override_mode())
         {
@@ -501,12 +501,12 @@ namespace owd_lib
         m_mode = mode;
     }
 
-    bool c_logger::global_override_mode()
+    bool c_logger_lib::global_override_mode()
     {
         return (log_mode_override_enabled);
     }
 
-    char const* const c_logger::mode_c_str(enm_log_mode enm_mode)
+    char const* const c_logger_lib::mode_c_str(enm_log_mode enm_mode)
     {
         char const* const f[4] = {};
         auto ff = f;
@@ -528,7 +528,7 @@ namespace owd_lib
         }
         return nullptr;
     }
-    void c_logger::m_print()
+    void c_logger_lib::m_print()
     {
         m_mtx.lock();
         {
@@ -545,7 +545,7 @@ namespace owd_lib
             if (mode != enm_log_mode::none)
             {
                 m_time_date_str.clear();
-                m_time_date_str = c_convert_strings::unicode(m_time_date.time_date());
+                m_time_date_str = owd::unicode(owd::time_date());
 
                 //time_date_str.pop_back();
                 m_line =
@@ -559,7 +559,7 @@ namespace owd_lib
                     //m_date_buffer_str.clear();
                     //m_date_buffer_str.resize(10);
                     //memcpy(m_date_buffer_str.data(), m_time_date_str.data(), 10);
-                    m_date_buffer_str = m_time_date_str.substr(0, 9);
+                    m_date_buffer_str = m_time_date_str.substr(0, 10);
 
                     if (m_date_buffer_str != m_date_str)
                     {
@@ -587,7 +587,7 @@ namespace owd_lib
                     //m_date_buffer_str.clear();
                     //m_date_buffer_str.resize(10);
                     //memcpy(m_date_buffer_str.data(), m_time_date_str.data(), 10);
-                    m_date_buffer_str = m_time_date_str.substr(0, 9);
+                    m_date_buffer_str = m_time_date_str.substr(0, 10);
 
                     if (m_date_buffer_str != m_date_str)
                     {

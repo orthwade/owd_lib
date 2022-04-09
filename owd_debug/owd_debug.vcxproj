@@ -19,15 +19,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\logger\logger.cpp" />
+    <ClInclude Include="include\$(ProjectName).h" />
+    <ClInclude Include="include\owd_debug.h" />
+    <ClInclude Include="src\logger.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\logger\logger.h" />
+    <ClCompile Include="include\owd_debug.cpp" />
+    <ClCompile Include="src\logger.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\owd_filesystem\owd_filesystem.vcxproj">
+      <Project>{42e98003-5dc3-49ba-a7a9-52d084735ae7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\owd_strings\owd_strings.vcxproj">
+      <Project>{21786f17-fefb-4b31-87d4-548eef0f98a2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\owd_time\owd_time.vcxproj">
+      <Project>{cfb283bf-907b-4492-8a79-555e3d91245a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{685b5e98-84c4-4830-b1b9-5c38c90fcad1}</ProjectGuid>
+    <ProjectGuid>{decf197b-b0e1-4d2c-9b0f-8f9a66bac02c}</ProjectGuid>
     <RootNamespace>owd_debug</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -97,6 +111,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -120,6 +135,7 @@ XCOPY "$(ProjectDir)include\$(ProjectName).h" "$(SolutionDir)include\" /S /Y</Co
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -143,6 +159,7 @@ XCOPY "$(ProjectDir)include\$(ProjectName).h" "$(SolutionDir)include\" /S /Y</Co
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -166,6 +183,7 @@ XCOPY "$(ProjectDir)include\$(ProjectName).h" "$(SolutionDir)include\" /S /Y</Co
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
