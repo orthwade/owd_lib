@@ -19,29 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\owd_debug_.h" />
-    <ClInclude Include="src\logger.h" />
+    <ClInclude Include="include\owd_misc_.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\owd_debug_.cpp" />
-    <ClCompile Include="src\logger.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\owd_filesystem\owd_filesystem.vcxproj">
-      <Project>{42e98003-5dc3-49ba-a7a9-52d084735ae7}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\owd_strings\owd_strings.vcxproj">
-      <Project>{21786f17-fefb-4b31-87d4-548eef0f98a2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\owd_time\owd_time.vcxproj">
-      <Project>{cfb283bf-907b-4492-8a79-555e3d91245a}</Project>
-    </ProjectReference>
+    <ClCompile Include="include\owd_misc.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{decf197b-b0e1-4d2c-9b0f-8f9a66bac02c}</ProjectGuid>
-    <RootNamespace>owd_debug</RootNamespace>
+    <ProjectGuid>{b71662a3-4fed-4320-ad0d-e641f5358fa6}</ProjectGuid>
+    <RootNamespace>owd_misc</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

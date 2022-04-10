@@ -15,31 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\compare_strings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\owd_strings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\text_file_to_string.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\c_convert_strings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="src\owd_static_lib_template_src.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\owd_static_lib_template_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\compare_strings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\owd_strings_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\text_file_to_string.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\c_convert_strings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="include\owd_static_lib_template_.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

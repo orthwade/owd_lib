@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\owd_filesystem.h">
+    <ClInclude Include="src\c_current_dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\c_current_dir.h">
+    <ClInclude Include="include\owd_filesystem_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -26,7 +26,7 @@
     <ClCompile Include="src\c_current_dir.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\owd_filesystem.cpp">
+    <ClCompile Include="include\owd_filesystem_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

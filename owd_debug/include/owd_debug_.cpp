@@ -1,4 +1,4 @@
-#include "owd_debug.h"
+#include "owd_debug_.h"
 #include "../src/logger.h"
 
 static owd_lib::c_logger_lib* lib_logger(void* data)
@@ -134,6 +134,11 @@ namespace owd
 		return *this;
 	}
 	c_logger& c_logger::operator<<(const char* input)
+	{
+		(*lib_logger(m_data)) << input;
+		return *this;
+	}
+	c_logger& c_logger::operator<<(const wchar_t* input)
 	{
 		(*lib_logger(m_data)) << input;
 		return *this;

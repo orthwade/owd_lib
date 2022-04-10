@@ -34,6 +34,7 @@ namespace owd
 		c_logger& operator<<(double input);
 
 		c_logger& operator<<(const char* input);
+		c_logger& operator<<(const wchar_t* input);
 		c_logger& operator<<(std::string_view input);
 		c_logger& operator<<(std::wstring_view input);
 

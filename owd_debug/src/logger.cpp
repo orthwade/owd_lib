@@ -7,7 +7,7 @@ namespace owd_lib
 {
     static auto setmode_result = _setmode(_fileno(stdout), _O_WTEXT);
 
-    bool c_logger_lib::log_mode_override_enabled = true;
+    bool c_logger_lib::log_mode_override_enabled = false;
     enm_log_mode c_logger_lib::log_mode_override = enm_log_mode::none;
 
     c_logger_lib::c_logger_lib()

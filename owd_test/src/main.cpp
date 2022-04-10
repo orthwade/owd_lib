@@ -39,7 +39,7 @@ int32_t main()
 	}
 	owd::c_logger logger{ L"Test_logger" };
 	logger.disable_global_mode_override();
-	logger << "Test message\n";
+	logger << L"Test message афкаывпавып\n";
 	//std::wcout << wstring_ << '\n';
 //	auto time = owd::
 	return 0;

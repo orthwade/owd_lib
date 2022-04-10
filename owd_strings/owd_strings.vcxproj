@@ -26,7 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\compare_strings.h" />
-    <ClInclude Include="include\owd_strings.h" />
+    <ClInclude Include="include\owd_strings_.h" />
     <ClInclude Include="src\c_convert_strings.h" />
     <ClInclude Include="src\text_file_to_string.h" />
   </ItemGroup>
@@ -112,7 +112,9 @@
     <PostBuildEvent>
       <Command>mkdir $(SolutionDir)lib\
 mkdir $(SolutionDir)include\
-XCOPY "$(ProjectDir)include\$(ProjectName).h" "$(SolutionDir)include\" /S /Y</Command>
+del "$(SolutionDir)include\$(ProjectName).h"
+XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -137,7 +139,9 @@ XCOPY "$(ProjectDir)include\$(ProjectName).h" "$(SolutionDir)include\" /S /Y</Co
     <PostBuildEvent>
       <Command>mkdir $(SolutionDir)lib\
 mkdir $(SolutionDir)include\
-XCOPY "$(ProjectDir)include\$(ProjectName).h" "$(SolutionDir)include\" /S /Y</Command>
+del "$(SolutionDir)include\$(ProjectName).h"
+XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -158,7 +162,9 @@ XCOPY "$(ProjectDir)include\$(ProjectName).h" "$(SolutionDir)include\" /S /Y</Co
     <PostBuildEvent>
       <Command>mkdir $(SolutionDir)lib\
 mkdir $(SolutionDir)include\
-XCOPY "$(ProjectDir)include\$(ProjectName).h" "$(SolutionDir)include\" /S /Y</Command>
+del "$(SolutionDir)include\$(ProjectName).h"
+XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -183,7 +189,9 @@ XCOPY "$(ProjectDir)include\$(ProjectName).h" "$(SolutionDir)include\" /S /Y</Co
     <PostBuildEvent>
       <Command>mkdir $(SolutionDir)lib\
 mkdir $(SolutionDir)include\
-XCOPY "$(ProjectDir)include\$(ProjectName).h" "$(SolutionDir)include\" /S /Y</Command>
+del "$(SolutionDir)include\$(ProjectName).h"
+XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

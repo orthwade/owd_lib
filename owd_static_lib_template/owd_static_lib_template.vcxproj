@@ -19,29 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\owd_debug_.h" />
-    <ClInclude Include="src\logger.h" />
+    <ClInclude Include="include\owd_static_lib_template_.h" />
+    <ClInclude Include="src\owd_static_lib_template_src.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\owd_debug_.cpp" />
-    <ClCompile Include="src\logger.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\owd_filesystem\owd_filesystem.vcxproj">
-      <Project>{42e98003-5dc3-49ba-a7a9-52d084735ae7}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\owd_strings\owd_strings.vcxproj">
-      <Project>{21786f17-fefb-4b31-87d4-548eef0f98a2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\owd_time\owd_time.vcxproj">
-      <Project>{cfb283bf-907b-4492-8a79-555e3d91245a}</Project>
-    </ProjectReference>
+    <ClCompile Include="include\owd_static_lib_template_.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{decf197b-b0e1-4d2c-9b0f-8f9a66bac02c}</ProjectGuid>
-    <RootNamespace>owd_debug</RootNamespace>
+    <ProjectGuid>{7df43cd2-0aba-424c-afec-bb4985c810bd}</ProjectGuid>
+    <RootNamespace>owd_static_lib_template</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -110,7 +98,6 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -136,7 +123,6 @@ rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -162,7 +148,6 @@ rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -188,7 +173,6 @@ rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>

@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\owd_time.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\c_async_timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -25,6 +22,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\time_date.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\owd_time_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClCompile Include="src\time_date.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\owd_time.cpp">
+    <ClCompile Include="include\owd_time_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
