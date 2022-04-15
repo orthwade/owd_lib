@@ -21,12 +21,24 @@
     <ClInclude Include="include\owd_filesystem_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\filestream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\c_files_in_directory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\c_current_dir.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\owd_filesystem_.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filestream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\c_files_in_directory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
