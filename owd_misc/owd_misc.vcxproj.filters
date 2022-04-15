@@ -15,12 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\owd_misc_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="include\owd_misc.cpp">
+    <ClCompile Include="include\owd_misc_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

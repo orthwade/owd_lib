@@ -4,12 +4,13 @@
 #include <io.h>
 #include <fcntl.h>
 
-//#pragma comment(lib, "owd_strings.lib")
-
+#include <owd_misc.h>
 #include <owd_strings.h>
 #include <owd_time.h>
-#include <owd_time.h>
 #include <owd_debug.h>
+#include <owd_sound.h>
+
+#pragma comment(lib, "owd_misc.lib")
 
 int32_t main()
 {
@@ -35,11 +36,17 @@ int32_t main()
 	{
 		timer.wait();
 		std::wcout << "Timer: " << i << '\n';
-		//timer.start(1000000);
+		timer.start(10000);
 	}
 	owd::c_logger logger{ L"Test_logger" };
 	logger.disable_global_mode_override();
 	logger << L"Test message афкаывпавып\n";
+
+	auto basic_object = owd::c_basic_object();
+	logger << basic_object.name() << '\n';
+
+	//auto test_extern = owd::c_test_extern();
+	//logger << test_extern << '\n';
 	//std::wcout << wstring_ << '\n';
 //	auto time = owd::
 	return 0;

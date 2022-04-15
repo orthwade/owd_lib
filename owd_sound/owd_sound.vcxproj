@@ -18,10 +18,17 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\owd_sound_.h" />
+    <ClInclude Include="src\owd_static_lib_template_src.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\owd_sound_.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{79466091-f171-4c5e-b542-38801053d9a0}</ProjectGuid>
+    <ProjectGuid>{ac9591e0-28a7-4435-8375-a4abbe267ff7}</ProjectGuid>
     <RootNamespace>owd_sound</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -91,6 +98,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -102,7 +110,8 @@
 mkdir $(SolutionDir)include\
 del "$(SolutionDir)include\$(ProjectName).h"
 XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
-rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -116,6 +125,7 @@ rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -129,7 +139,8 @@ rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
 mkdir $(SolutionDir)include\
 del "$(SolutionDir)include\$(ProjectName).h"
 XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
-rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -141,6 +152,7 @@ rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -152,7 +164,8 @@ rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
 mkdir $(SolutionDir)include\
 del "$(SolutionDir)include\$(ProjectName).h"
 XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
-rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -166,6 +179,7 @@ rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -179,7 +193,8 @@ rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
 mkdir $(SolutionDir)include\
 del "$(SolutionDir)include\$(ProjectName).h"
 XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
-rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h</Command>
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -40,6 +40,9 @@ namespace owd
 
 		c_logger& operator<<(char c);
 		c_logger& operator<<(wchar_t c);
+			
+		void set_name(std::wstring_view name);
+		std::wstring_view name();
 
 		c_logger();
 		c_logger(std::wstring_view name);
@@ -48,7 +51,6 @@ namespace owd
 		~c_logger();
 
 	private:
-		std::wstring m_name;
 		void* m_data;
 	};
 }

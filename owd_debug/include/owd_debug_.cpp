@@ -6,24 +6,31 @@ static owd_lib::c_logger_lib* lib_logger(void* data)
 	return reinterpret_cast<owd_lib::c_logger_lib*>(data);
 }
 
+void owd::c_logger::set_name(std::wstring_view name)
+{
+	lib_logger(m_data)->set_name(name);
+}
+
+std::wstring_view owd::c_logger::name()
+{
+	return lib_logger(m_data)->name();
+}
+
 owd::c_logger::c_logger()
 	: 
-	m_name(L"logger"),
-	m_data(new owd_lib::c_logger_lib(m_name, owd_lib::enm_log_mode::both))
+	m_data(new owd_lib::c_logger_lib(L"logger", owd_lib::enm_log_mode::both))
 {
 }
 
 owd::c_logger::c_logger(std::wstring_view name)
 	:
-	m_name(name),
-	m_data(new owd_lib::c_logger_lib(m_name, owd_lib::enm_log_mode::both))
+	m_data(new owd_lib::c_logger_lib(name, owd_lib::enm_log_mode::both))
 {
 }
 
 owd::c_logger::c_logger(std::wstring_view name, uint16_t mode)
 	:
-	m_name(name),
-	m_data(new owd_lib::c_logger_lib(m_name, owd_lib::enm_log_mode::both))
+	m_data(new owd_lib::c_logger_lib(name, owd_lib::enm_log_mode::both))
 {
 	set_mode(mode);
 }

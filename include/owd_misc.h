@@ -13,35 +13,34 @@ namespace owd
 
 	class c_basic_object
 	{
-	public:
-		c_basic_object(std::wstring_view name);
-		c_basic_object();
+    public:
+        c_basic_object();
 
-		virtual void reset();
+        virtual void reset();
 
-		inline void set_name(std::wstring_view name) { m_name = name; }
+        void set_name(std::wstring_view name);
 
-		inline std::wstring_view name() const { return m_name; }
+        std::wstring_view name() const;
 
-		virtual bool good() const;
+        virtual bool good() const;
 
-		inline data_t& data() { return m_data_shared_ptr; }
-		inline byte_t* data_raw_ptr() { return data()->data(); }
+        data_t& data();
+        byte_t* data_raw_ptr();
 
-		virtual inline size_t size_bytes() const { return m_data_shared_ptr->size(); }
-	protected:
-        std::wstring m_name{ L"basic_object" };
+        virtual size_t size_bytes() const;
 
-		data_t m_data_shared_ptr = std::make_shared<bytes_t>();
+    protected:
+        std::wstring m_name;
 
-		inline bool default_good() const { return m_good; }
+        data_t m_data_shared_ptr;
 
-	private:
-		bool m_good = true;
+        bool default_good() const;
+
+    private:
+        bool m_good;
 	};
-
     
-    template <class T>
+    template<class T>
     class c_object_bank
     {
     public:
@@ -50,13 +49,11 @@ namespace owd
 
         ~c_object_bank();
 
-        inline void set_name(std::wstring_view name) { this->m_name = name; }
-
-        inline std::wstring_view name() { return this->m_name; }
+        void set_name(std::wstring_view name);
 
         void add(std::shared_ptr<T>& object);
 
-        std::shared_ptr<T>& by_index(uint64_t i);
+        std::shared_ptr<T>& by_index(index_t i);
         std::shared_ptr<T>& by_name(std::wstring_view name);
 
         std::shared_ptr<T>& first();
@@ -64,41 +61,41 @@ namespace owd
 
         void clear();
 
-        void erase(uint64_t index);
+        void erase(index_t index);
         void erase(std::wstring_view name);
 
-        virtual inline size_t size_bytes() const { return this->m_vec_objects.size(); }
+        size_t count() const;
 
-        inline size_t count() { return this->m_vec_objects.size(); }
+        bool empty() const;
 
-        inline bool empty() { return (this->count() > 0); }
-
-        inline std::shared_ptr<T>& operator[](index_t i) { return this->by_index(i); }
-        inline std::shared_ptr<T>& operator[](std::wstring_view name) { return this->by_name(name); }
+        std::shared_ptr<T>& operator[](index_t i);
+        std::shared_ptr<T>& operator[](std::wstring_view name);
 
     protected:
         static std::shared_ptr<T> m_empty_object;
 
-        std::wstring m_name{ L"object_bank_object" };
+        std::wstring m_name;
+        std::vector<std::shared_ptr<T>> m_vec_objects;
 
-        std::vector<std::shared_ptr<T>> m_vec_objects{};
-
-        bool check_double(const T& object);
         bool check_double(std::shared_ptr<T>& object);
     };
 
-    template <class T>
-    std::shared_ptr<T> c_object_bank<T>::m_empty_object{};
+    template<class T>
+    std::shared_ptr<T> c_object_bank<T>::m_empty_object{ L"empty_object" };
 
     template<class T>
     c_object_bank<T>::c_object_bank()
+        :
+        m_name(L"object_bank"),
+        m_vec_objects()
     {
     }
 
     template<class T>
     c_object_bank<T>::c_object_bank(std::wstring_view name)
         :
-        m_name(name)
+        m_name(name),
+        m_vec_objects()
     {
     }
 
@@ -108,26 +105,30 @@ namespace owd
     }
 
     template<class T>
+    void c_object_bank<T>::set_name(std::wstring_view name)
+    {
+        this->m_name = name;
+    }
+
+    template<class T>
     void c_object_bank<T>::add(std::shared_ptr<T>& object)
     {
+        if (object->good())
         {
-            if (object->good())
+            if (this->check_double(object))
             {
-                if (this->check_double(*object))
-                {
-                    this->m_vec_objects.push_back(object);
-                }
-                else
-                {
-                }
+                this->m_vec_objects.push_back(object);
             }
             else
             {
             }
         }
+        else
+        {
+        }
     }
     template<class T>
-    std::shared_ptr<T>& c_object_bank<T>::by_index(uint64_t i)
+    std::shared_ptr<T>& c_object_bank<T>::by_index(index_t i)
     {
         if (this->m_vec_objects.empty())
         {
@@ -168,26 +169,26 @@ namespace owd
     template<class T>
     std::shared_ptr<T>& c_object_bank<T>::first()
     {
-        if (m_vec_objects.empty())
+        if (this->m_vec_objects.empty())
         {
             return m_empty_object;
         }
         else
         {
-            return m_vec_objects.front();
+            return this->m_vec_objects.front();
         }
     }
 
     template<class T>
     std::shared_ptr<T>& c_object_bank<T>::last()
     {
-        if (m_vec_objects.empty())
+        if (this->m_vec_objects.empty())
         {
             return m_empty_object;
         }
         else
         {
-            return m_vec_objects.back();
+            return this->m_vec_objects.back();
         }
     }
 
@@ -240,21 +241,29 @@ namespace owd
             }
         }
     }
+
     template<class T>
-    bool c_object_bank<T>::check_double(const T& object)
+    size_t c_object_bank<T>::count() const
     {
-        bool found_double = false;
-        for (uint64_t i = 0; i != this->m_vec_objects.size(); ++i)
-        {
-            if (owd::strings_are_equal(this->m_vec_objects[i]->name(), object.name()))
-            {
-                found_double = true;
-                break;
-            }
-        }
-        return found_double;
+        return this->m_vec_objects.size();
     }
 
+    template<class T>
+    bool c_object_bank<T>::empty() const
+    {
+        return this->m_vec_objects.empty();
+    }
+
+    template<class T>
+    std::shared_ptr<T>& c_object_bank<T>::operator[](index_t i)
+    {
+        return this->by_index(i);
+    }
+    template<class T>
+    std::shared_ptr<T>& owd::c_object_bank<T>::operator[](std::wstring_view name)
+    {
+        return this->by_name(name);
+    }
     template<class T>
     bool c_object_bank<T>::check_double(std::shared_ptr<T>& object)
     {
@@ -269,6 +278,5 @@ namespace owd
         }
         return found_double;
     }
-
 
 }
