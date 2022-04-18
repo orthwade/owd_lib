@@ -2,9 +2,14 @@
 
 namespace owd
 {
+
     bool c_basic_object::good() const
     {
         return default_good();
+    }
+    bool c_basic_object::set_bad()
+    {
+        return m_good = false;
     }
     data_t& c_basic_object::data()
     {
@@ -22,7 +27,8 @@ namespace owd
         :
         m_name(L"basic_object"),
         m_data_shared_ptr(std::make_shared<bytes_t>()),
-        m_good(true)
+        m_good(true),
+        m_logger(L"basic_object_logger")
     {
     }
     void c_basic_object::reset()

@@ -109,7 +109,6 @@ namespace owd
     }
     void c_file::reset()
     {
-        *this = c_file();
     }
     bool c_file::load_default(std::wstring_view filepath)
     {

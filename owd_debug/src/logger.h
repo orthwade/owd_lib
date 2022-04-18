@@ -9,7 +9,9 @@
 #include <io.h>
 #include <fcntl.h>
 
+#ifndef ASSERT
 #define ASSERT(x) if(!(x)) __debugbreak();
+#endif // !ASSERT
 
 namespace owd_lib
 {

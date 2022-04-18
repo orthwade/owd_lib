@@ -19,52 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\owd_sound_.h" />
-    <ClInclude Include="src\c_listener.h" />
-    <ClInclude Include="src\c_openal_object.h" />
-    <ClInclude Include="src\c_sound.h" />
-    <ClInclude Include="src\c_sound_bank.h" />
-    <ClInclude Include="src\c_sound_buffer.h" />
-    <ClInclude Include="src\c_sound_device.h" />
-    <ClInclude Include="src\c_sound_distance_model.h" />
-    <ClInclude Include="src\c_sound_file.h" />
-    <ClInclude Include="src\c_sound_source.h" />
-    <ClInclude Include="src\c_sound_source_bank.h" />
-    <ClInclude Include="src\ogg\codec.h" />
-    <ClInclude Include="src\ogg\config_types.h" />
-    <ClInclude Include="src\ogg\ogg.h" />
-    <ClInclude Include="src\ogg\ogg_.h" />
-    <ClInclude Include="src\ogg\os_types.h" />
-    <ClInclude Include="src\ogg\vorbisfile.h" />
-    <ClInclude Include="src\openal\al.h" />
-    <ClInclude Include="src\openal\alc.h" />
-    <ClInclude Include="src\openal\alext.h" />
-    <ClInclude Include="src\openal\efx-creative.h" />
-    <ClInclude Include="src\openal\efx-presets.h" />
-    <ClInclude Include="src\openal\efx.h" />
-    <ClInclude Include="src\openal\openal.h" />
+    <ClInclude Include="include\owd_math_.h" />
     <ClInclude Include="src\owd_static_lib_template_src.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\owd_sound_.cpp" />
-    <ClCompile Include="src\c_listener.cpp" />
-    <ClCompile Include="src\c_openal_object.cpp" />
-    <ClCompile Include="src\c_sound.cpp" />
-    <ClCompile Include="src\c_sound_bank.cpp" />
-    <ClCompile Include="src\c_sound_buffer.cpp" />
-    <ClCompile Include="src\c_sound_device.cpp" />
-    <ClCompile Include="src\c_sound_distance_model.cpp" />
-    <ClCompile Include="src\c_sound_file.cpp" />
-    <ClCompile Include="src\c_sound_source.cpp" />
-    <ClCompile Include="src\c_sound_source_bank.cpp" />
-    <ClCompile Include="src\ogg\ogg_.cpp" />
-    <ClCompile Include="src\openal\openal.cpp" />
+    <ClCompile Include="include\owd_math_.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ac9591e0-28a7-4435-8375-a4abbe267ff7}</ProjectGuid>
-    <RootNamespace>owd_sound</RootNamespace>
+    <ProjectGuid>{5b92b9b0-da43-48ea-814c-ae0e3626890d}</ProjectGuid>
+    <RootNamespace>owd_math</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

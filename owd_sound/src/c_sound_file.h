@@ -1,9 +1,10 @@
 #pragma once
-#include "../filesystem/c_file.h"
+#include <owd_misc.h>
+#include <owd_filesystem.h>
 
 namespace owd_lib
 {
-	class c_sound_file : public c_file
+	class c_sound_file : public owd::c_file
 	{
 	public:
 		c_sound_file();
@@ -15,7 +16,7 @@ namespace owd_lib
 		inline	uint32_t	bits_per_sample			() { return m_bits_per_sample			; }
 		inline	uint32_t	sound_data_bytes_count	() { return m_sound_data_bytes_count	; }
 
-		virtual inline	byte_t* sound_data_ptr() = 0;
+		virtual inline owd::byte_t* sound_data_ptr() = 0;
 
 	protected:
 		size_t		m_samples_count{};

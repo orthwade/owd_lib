@@ -22,13 +22,11 @@
     <ClInclude Include="include\owd_filesystem_.h" />
     <ClInclude Include="src\c_current_dir.h" />
     <ClInclude Include="src\c_files_in_directory.h" />
-    <ClInclude Include="src\filestream.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\owd_filesystem_.cpp" />
     <ClCompile Include="src\c_current_dir.cpp" />
     <ClCompile Include="src\c_files_in_directory.cpp" />
-    <ClCompile Include="src\filestream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\owd_strings\owd_strings.vcxproj">

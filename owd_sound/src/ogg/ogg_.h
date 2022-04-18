@@ -5,7 +5,6 @@
 #include <iomanip>
 #include <vector>
 
-#include <owd_debug.h>
 #include <owd_misc.h>
 
 #include "codec.h"
@@ -30,10 +29,10 @@ namespace owd_lib
 		
 		void reset() override;
 
-		inline	byte_t* sound_data_ptr() override { return m_sound_data_ptr; }
+		inline	owd::byte_t* sound_data_ptr() override { return m_sound_data_ptr; }
 
 	private:
-		byte_t*		m_sound_data_ptr = nullptr;
-		byte_t*		m_sound_data_ptr_start_position = nullptr;
+		owd::byte_t*		m_sound_data_ptr = nullptr;
+		owd::byte_t*		m_sound_data_ptr_start_position = nullptr;
 	};
 }

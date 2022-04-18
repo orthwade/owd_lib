@@ -14,7 +14,7 @@ namespace owd_lib
 		std::ifstream& stream = *static_cast<std::ifstream*>(data_source);
 		stream.read(static_cast<char*>(buffer), element_count);
 		const std::streamsize bytes_read = stream.gcount();
-		stream.clear(); // In case we read past EOF
+		stream.clear();
 		return static_cast<size_t>(bytes_read);
 	}
 
@@ -27,7 +27,7 @@ namespace owd_lib
 
 		std::ifstream& stream = *static_cast<std::ifstream*>(data_source);
 		stream.seekg(offset, seek_directions.at(origin));
-		stream.clear(); // In case we seeked to EOF
+		stream.clear(); 
 		return 0;
 	}
 
@@ -45,7 +45,7 @@ namespace owd_lib
 		
 	{
 		m_logger << "----ogg_file constructor START----\n";
-		set_logger_name(L"ogg_file_object_logger");
+		m_logger.set_name(L"ogg_file_logger");
 		set_name(L"ogg_file_object");
 		m_logger << "----ogg_file constructor OK----\n";
 	}
@@ -63,23 +63,30 @@ namespace owd_lib
 	}
 	bool c_ogg_file::load(std::wstring_view filepath, std::wstring_view name)
 	{
-		set_name(name);
-		m_filepath = (filepath);
+		if (filepath == L"")
+		{
+		}
+		else
+		{
+			m_filepath = (filepath);
+		}
 
 		m_logger << "loading file: " << m_filepath << '\n';
 
 		//m_mtx.lock();
 		{
-			m_ifstream().open(m_filepath, std::ios::binary);
+			//m_ok = false;
+			auto& m_file_stream = m_ifstream();
+			m_file_stream.open(m_filepath, std::ios::binary);
 
-			if (m_ifstream().is_open())
+			if (m_file_stream.is_open())
 			{
 				m_logger << "file open OK\n";
 			}
 			else
 			{
 				m_logger << "file open ERROR\n";
-				m_state = enm_state::error;
+				//m_mtx.unlock();
 				return false;
 			}
 
@@ -87,10 +94,9 @@ namespace owd_lib
 
 			vorbis_info* vorbis_info_ = nullptr;
 
-			if (ov_open_callbacks(&m_ifstream, &ogg_vorbis_file, nullptr, 0, callbacks) < 0)
+			if (ov_open_callbacks(&m_file_stream, &ogg_vorbis_file, nullptr, 0, callbacks) < 0)
 			{
 				m_logger << "ov_open_callbacks ERROR\n";
-				m_state = enm_state::error;
 				//m_mtx.unlock();
 				return false;
 			}
@@ -117,13 +123,10 @@ namespace owd_lib
 			int32_t end_of_file = 0;
 			int64_t read_bytes_count{};
 			int64_t total_read_bytes_count{};
-
-			auto sound_data_char_ptr = reinterpret_cast<char*>(m_sound_data_ptr);
-
 			while (!end_of_file)
 			{
 				read_bytes_count =
-					ov_read(&ogg_vorbis_file, sound_data_char_ptr, 4096, 0, m_bits_per_sample / 8, 1, &current_section);
+					ov_read(&ogg_vorbis_file, reinterpret_cast<char*>(m_sound_data_ptr), 4096, 0, m_bits_per_sample / 8, 1, &current_section);
 				if (read_bytes_count == 0)
 				{
 					end_of_file = 1;
@@ -143,12 +146,14 @@ namespace owd_lib
 
 			m_sound_data_ptr = m_sound_data_ptr_start_position;
 			//m_sound_data_ptr -= total_read_bytes_count;
-			m_ifstream().close();
+			m_file_stream.close();
 			ov_clear(&ogg_vorbis_file);
 			m_logger << "loading file OK\n";
 			m_state = enm_state::good;
+			//m_ok = true;
 		}
 		//m_mtx.unlock();
+
 
 		return true;
 	}

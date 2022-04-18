@@ -1,6 +1,10 @@
 #pragma once
 #include <string_view>
 
+#ifndef ASSERT
+#define ASSERT(x) if(!(x)) __debugbreak();
+#endif // !ASSERT
+
 namespace owd
 {
 	class c_logger

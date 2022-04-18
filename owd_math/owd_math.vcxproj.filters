@@ -15,24 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\c_current_dir.h">
+    <ClInclude Include="src\owd_static_lib_template_src.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\owd_filesystem_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\c_files_in_directory.h">
+    <ClInclude Include="include\owd_math_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\c_current_dir.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\owd_filesystem_.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\c_files_in_directory.cpp">
+    <ClCompile Include="include\owd_math_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

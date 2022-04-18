@@ -157,8 +157,17 @@
     <ProjectReference Include="..\owd_debug\owd_debug.vcxproj">
       <Project>{decf197b-b0e1-4d2c-9b0f-8f9a66bac02c}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\owd_filesystem\owd_filesystem.vcxproj">
+      <Project>{42e98003-5dc3-49ba-a7a9-52d084735ae7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\owd_math\owd_math.vcxproj">
+      <Project>{5b92b9b0-da43-48ea-814c-ae0e3626890d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\owd_misc\owd_misc.vcxproj">
       <Project>{b71662a3-4fed-4320-ad0d-e641f5358fa6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\owd_sound\owd_sound.vcxproj">
+      <Project>{ac9591e0-28a7-4435-8375-a4abbe267ff7}</Project>
     </ProjectReference>
     <ProjectReference Include="..\owd_strings\owd_strings.vcxproj">
       <Project>{21786f17-fefb-4b31-87d4-548eef0f98a2}</Project>

@@ -74,5 +74,22 @@ int32_t main()
 	//logger << test_extern << '\n';
 	//std::wcout << wstring_ << '\n';
 //	auto time = owd::
+	auto listener = owd::c_listener::get_instance();
+	listener->set_default_orientation();
+	listener->set_position(0.0f, 0.0f, 0.0f);
+	listener->set_gain(0.99);
+	auto sound_1 = owd::c_sound_source(L"");
+
+	//sound_1.load_sound(L"C:/Users/boba/Downloads/sample1.ogg", L"sample1");
+	sound_1.load_sound(L"C:/Users/boba/Downloads/Rear_left.ogg", L"sample1");
+	sound_1.set_position(-1.0f, 0.0f, -9.0f);
+	sound_1.set_gain(0.99f);
+	sound_1.enable({ L"sample1" });
+	std::cin.get();
+	sound_1.stop();
+
+
+
+
 	return 0;
 }

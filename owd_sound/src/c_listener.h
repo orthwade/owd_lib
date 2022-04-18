@@ -1,9 +1,11 @@
 #pragma once
-#include <owd_misc.h>
+#include <owd_math.h>
 
-namespace owd
+#include "c_openal_object.h"
+
+namespace owd_lib
 {
-	class c_listener
+	class c_listener_lib : public c_openal_object
 	{
 	public:
 		void set_position(float x, float y, float z);
@@ -42,50 +44,28 @@ namespace owd
 
 		float gain();
 
-		static c_listener* get_instance();
+		static c_listener_lib* get_instance();
 		static void terminate();
 
-	private:
-		static c_listener* m_singleton;
+	protected:
+		float m_x{};
+		float m_y{};
+		float m_z{};
 
-		c_listener();
+		owd::c_orientation m_ori{};
+
+		float m_gain{};
+
+		float m_velocity_x{};
+		float m_velocity_y{};
+		float m_velocity_z{};
+
+		static c_listener_lib* m_singleton;
+
+		c_listener_lib();
+		~c_listener_lib();
+
+		c_listener_lib(const c_listener_lib&) = delete;
+		c_listener_lib& operator=(const c_listener_lib&) = delete;
 	};
-
-	void load_sound(std::wstring_view filepath, std::wstring_view name);
-	bool check_sound_by_name(std::wstring_view name);
-	bool check_sound_by_filepath(std::wstring_view filepath);
-
-	class c_sound_source
-	{
-	public:
-		c_sound_source(std::wstring_view name);
-		~c_sound_source();
-
-		std::wstring_view name();
-
-		void load_sound(std::wstring_view filepath, std::wstring_view name);
-		void add_sound(std::wstring_view sound_name);
-
-		void enable();
-		void pause();
-		void stop();
-
-		void enable	(std::vector<std::wstring_view> vec_sound_name);
-		void pause	(std::vector<std::wstring_view> vec_sound_name);
-		void stop	(std::vector<std::wstring_view> vec_sound_name);
-
-		void set_position(float x, float y, float z);
-		void set_gain(float gain);
-
-		void set_gain(std::wstring_view sound_name, float gain);
-
-		void detach_sound(std::wstring_view sound_name);
-		void detach_all();
-
-	private:
-		void* m_data;
-		//ALuint m_oal_source{};
-		//ALuint m_oal_buffer{};
-	};
-
-};
+}

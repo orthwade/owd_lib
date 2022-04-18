@@ -2,7 +2,10 @@
 #include <string_view>
 #include <vector>
 #include <memory>
+#include <array>
+
 #include <owd_strings.h>
+#include <owd_debug.h>
 
 namespace owd
 {
@@ -10,6 +13,16 @@ namespace owd
 	typedef uint8_t byte_t;
 	typedef std::vector<byte_t> bytes_t;
 	typedef std::shared_ptr<bytes_t> data_t;
+    typedef std::array<float, 3> xyz_t; // array of space coordinates in Cartesian coordinate system
+
+    /// <summary>
+    /// array of orientaion coordinates in Cartesian coordinate system, 
+    /// elements 0-2 are vector pointing where the object is "looking at"
+    /// elements 3-5 are vector pointing whre the top of the object is pointing
+    /// </summary>
+    typedef std::array<float, 6> ori_t;
+
+    constexpr float pi_ = 3.14159265358979324f;
 
 	class c_basic_object
 	{
@@ -24,21 +37,24 @@ namespace owd
 
         virtual bool good() const;
 
+        virtual bool set_bad();
+
         data_t& data();
         byte_t* data_raw_ptr();
 
         virtual size_t size_bytes() const;
 
     protected:
+        c_logger m_logger;
         std::wstring m_name;
 
         data_t m_data_shared_ptr;
 
-        bool default_good() const;
 
     private:
         bool m_good;
-	};
+        bool default_good() const;
+    };
     
     template<class T>
     class c_object_bank
@@ -72,6 +88,7 @@ namespace owd
         std::shared_ptr<T>& operator[](std::wstring_view name);
 
     protected:
+        c_logger m_logger;
         static std::shared_ptr<T> m_empty_object;
 
         std::wstring m_name;
@@ -87,7 +104,8 @@ namespace owd
     c_object_bank<T>::c_object_bank()
         :
         m_name(L"object_bank"),
-        m_vec_objects()
+        m_vec_objects(),
+        m_logger(L"object_bank_logger")
     {
     }
 
@@ -95,7 +113,8 @@ namespace owd
     c_object_bank<T>::c_object_bank(std::wstring_view name)
         :
         m_name(name),
-        m_vec_objects()
+        m_vec_objects(),
+        m_logger(L"object_bank_logger")
     {
     }
 
