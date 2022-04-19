@@ -4,13 +4,13 @@ namespace owd_lib
 {
 	c_sound_distance_model* c_sound_distance_model::m_singleton = nullptr;
 
-	static constexpr enum_distance_model inverse_distance_ = enum_distance_model::inverse_distance;
-	static constexpr enum_distance_model inverse_distance_clamped_ = enum_distance_model::inverse_distance_clamped;
-	static constexpr enum_distance_model linear_distance_ = enum_distance_model::linear_distance;
-	static constexpr enum_distance_model linear_distance_clamped_ = enum_distance_model::linear_distance_clamped;
-	static constexpr enum_distance_model exponent_distance_ = enum_distance_model::exponent_distance;
-	static constexpr enum_distance_model exponent_distance_clamped_ = enum_distance_model::exponent_distance_clamped;
-	static constexpr enum_distance_model none_ = enum_distance_model::none;
+	static constexpr enum_distance_model_lib inverse_distance_ = enum_distance_model_lib::inverse_distance;
+	static constexpr enum_distance_model_lib inverse_distance_clamped_ = enum_distance_model_lib::inverse_distance_clamped;
+	static constexpr enum_distance_model_lib linear_distance_ = enum_distance_model_lib::linear_distance;
+	static constexpr enum_distance_model_lib linear_distance_clamped_ = enum_distance_model_lib::linear_distance_clamped;
+	static constexpr enum_distance_model_lib exponent_distance_ = enum_distance_model_lib::exponent_distance;
+	static constexpr enum_distance_model_lib exponent_distance_clamped_ = enum_distance_model_lib::exponent_distance_clamped;
+	static constexpr enum_distance_model_lib none_ = enum_distance_model_lib::none;
 
 	void c_sound_distance_model::set_model(ALenum input)
 	{
@@ -59,7 +59,7 @@ namespace owd_lib
 		//m_mtx.unlock();
 	}
 
-	void c_sound_distance_model::set_model(enum_distance_model input)
+	void c_sound_distance_model::set_model(enum_distance_model_lib input)
 	{
 		switch (input)
 		{

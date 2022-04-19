@@ -3,6 +3,24 @@
 
 namespace owd
 {
+	constexpr uint8_t inverse_distance_sound_model			= 0;
+	constexpr uint8_t inverse_distance_clamped_sound_model	= 1;
+	constexpr uint8_t linear_distance_sound_model			= 2;
+	constexpr uint8_t linear_distance_clamped_sound_model	= 3;
+	constexpr uint8_t exponent_distance_sound_model			= 4;
+	constexpr uint8_t exponent_distance_clamped_sound_model	= 5;
+	constexpr uint8_t none_distance_sound_model				= 6;
+
+	void set_sound_distance_model(uint8_t input);
+
+	void set_sound_default_reference_distance	(float input);
+	void set_sound_default_rolloff_factor		(float input);
+	void set_sound_default_max_distance			(float input);
+
+	float default_sound_reference_distance();
+	float default_sound_rolloff_factor();
+	float default_sound_max_distance();
+
 	class c_listener
 	{
 	public:
@@ -79,13 +97,15 @@ namespace owd
 
 		void set_gain(std::wstring_view sound_name, float gain);
 
+		void set_reference_distance	(float input);
+		void set_rolloff_factor		(float input);
+		void set_max_distance		(float input);
+
 		void detach_sound(std::wstring_view sound_name);
 		void detach_all();
 
 	private:
 		void* m_data;
-		//ALuint m_oal_source{};
-		//ALuint m_oal_buffer{};
 	};
 
 };

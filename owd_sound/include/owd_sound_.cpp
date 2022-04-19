@@ -4,6 +4,7 @@
 #include "../src/c_sound_source.h"
 #include "../src/c_sound_distance_model.h"
 
+owd_lib::c_sound_distance_model* static_sound_distance_model = owd_lib::c_sound_distance_model::get_instance();
 owd::c_listener* owd::c_listener::m_singleton = nullptr;
 
 static owd_lib::c_listener_lib* static_listener_lib = nullptr;
@@ -11,6 +12,23 @@ static owd_lib::c_sound_bank* static_sound_bank = owd_lib::c_sound_bank::get_ins
 static owd_lib::c_sound_source_lib* sound_source_lib(void* m_data) 
 {
 	return reinterpret_cast<owd_lib::c_sound_source_lib*>(m_data);
+}
+
+static owd_lib::enum_distance_model_lib convert_sound_distance_model(uint8_t input)
+{
+	owd_lib::enum_distance_model_lib result = owd_lib::enum_distance_model_lib::inverse_distance_clamped;
+	switch (input)
+	{
+		case uint8_t(0): owd_lib::enum_distance_model_lib::inverse_distance		    ; break;
+		case uint8_t(2): owd_lib::enum_distance_model_lib::linear_distance		    ; break;
+		case uint8_t(3): owd_lib::enum_distance_model_lib::linear_distance_clamped  ; break;
+		case uint8_t(4): owd_lib::enum_distance_model_lib::exponent_distance		; break;
+		case uint8_t(5): owd_lib::enum_distance_model_lib::exponent_distance_clamped; break;
+		case uint8_t(6): owd_lib::enum_distance_model_lib::none						; break;
+		default:
+			break;
+	}
+	return result;
 }
 
 namespace owd
@@ -104,17 +122,6 @@ namespace owd
 		m_data(new owd_lib::c_sound_source_lib(name))
 	{
 		auto distance_model = owd_lib::c_sound_distance_model::get_instance();
-		//AL_CALL(alGenSources(1, &m_oal_source));
-
-		//AL_CALL(alSourcei(m_oal_source, AL_BUFFER, m_oal_source));
-		//				  
-		//AL_CALL(alSourcef(m_oal_source, AL_REFERENCE_DISTANCE, distance_model->default_reference_distance()));
-		//				  
-		//AL_CALL(alSourcef(m_oal_source, AL_ROLLOFF_FACTOR, distance_model->default_rolloff_factor()));
-		//				  
-		//AL_CALL(alSourcef(m_oal_source, AL_MAX_DISTANCE, distance_model->default_max_distance()));
-		//				  
-		//AL_CALL(alSourcef(m_oal_source, AL_GAIN, 0.99f));
 	}
 
 	c_sound_source::~c_sound_source()
@@ -184,6 +191,21 @@ namespace owd
 		sound_source_lib(m_data)->set_gain(sound_name, gain);
 	}
 
+	void c_sound_source::set_reference_distance(float input)
+	{
+		sound_source_lib(m_data)->set_reference_distance(input);
+	}
+
+	void c_sound_source::set_rolloff_factor(float input)
+	{
+		sound_source_lib(m_data)->set_rolloff_factor(input);
+	}
+
+	void c_sound_source::set_max_distance(float input)
+	{
+		sound_source_lib(m_data)->set_max_distance(input);
+	}
+
 	void c_sound_source::detach_sound(std::wstring_view sound_name)
 	{
 		sound_source_lib(m_data)->remove_sound_by_name(sound_name);
@@ -209,5 +231,44 @@ namespace owd
 		return static_sound_bank->by_filepath(filepath)->good();
 	}
 
+	/*void set_sound_distance_model(enum_distance_model input)
+	{
+		static_sound_distance_model->set_model()
+	}*/
+
+	void set_sound_distance_model(uint8_t input)
+	{
+		static_sound_distance_model->set_model(convert_sound_distance_model(input));
+	}
+
+	void set_sound_default_reference_distance(float input)
+	{
+		static_sound_distance_model->set_default_reference_distance(input);
+	}
+
+	void set_sound_default_rolloff_factor(float input)
+	{
+		static_sound_distance_model->set_default_rolloff_factor(input);
+	}
+
+	void set_sound_default_max_distance(float input)
+	{
+		static_sound_distance_model->set_default_max_distance(input);
+	}
+
+	float default_sound_reference_distance()
+	{
+		return 0.0f;
+	}
+
+	float default_sound_rolloff_factor()
+	{
+		return 0.0f;
+	}
+
+	float default_sound_max_distance()
+	{
+		return 0.0f;
+	}
 
 }

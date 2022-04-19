@@ -3,7 +3,7 @@
 
 namespace owd_lib
 {
-	enum class enum_distance_model
+	enum class enum_distance_model_lib
 	{
 		inverse_distance,
 		inverse_distance_clamped,
@@ -18,7 +18,7 @@ namespace owd_lib
 	{
 	public:
 		void set_model(ALenum input);
-		void set_model(enum_distance_model input);
+		void set_model(enum_distance_model_lib input);
 
 		void set_default_reference_distance(float input);
 		void set_default_rolloff_factor(float input);
