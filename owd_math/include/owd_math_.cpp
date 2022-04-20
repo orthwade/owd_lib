@@ -1,7 +1,70 @@
 #include "owd_math_.h"
+#include "../src/glm/glm.hpp"
+#include "../src/glm/ext/matrix_clip_space.hpp"
 
 namespace owd
 {
+	s_2d_coordinates_cartesian::s_2d_coordinates_cartesian()
+	{
+	}
+	s_2d_coordinates_cartesian::s_2d_coordinates_cartesian(float x_, float y_)
+		:
+		x(x_),
+		y(y_)
+	{
+	}
+	s_2d_coordinates_cartesian s_2d_coordinates_cartesian::operator+(const s_2d_coordinates_cartesian& other)
+	{
+		xy_t result{};
+		result.x = this->x + other.x;
+		result.y = this->y + other.y;
+		return result;
+	}
+	s_2d_coordinates_cartesian& s_2d_coordinates_cartesian::operator+=(const s_2d_coordinates_cartesian& other)
+	{
+		this->x += other.x;
+		this->y += other.y;
+		return *this;
+	}
+	s_2d_coordinates_cartesian s_2d_coordinates_cartesian::operator-(const s_2d_coordinates_cartesian& other)
+	{
+		xy_t result{};
+		result.x = this->x - other.x;
+		result.y = this->y - other.y;
+		return result;
+	}
+	s_2d_coordinates_cartesian& s_2d_coordinates_cartesian::operator-=(const s_2d_coordinates_cartesian& other)
+	{
+		this->x -= other.x;
+		this->y -= other.y;
+		return *this;
+	}
+	s_2d_coordinates_cartesian s_2d_coordinates_cartesian::operator*(float multilpier)
+	{
+		xy_t result{};
+		result.x = this->x * multilpier;
+		result.y = this->y * multilpier;
+		return result;
+	}
+	s_2d_coordinates_cartesian& s_2d_coordinates_cartesian::operator*=(float multilpier)
+	{
+		this->x *= multilpier;
+		this->y *= multilpier;
+		return *this;
+	}
+	s_2d_coordinates_cartesian s_2d_coordinates_cartesian::operator/(float divisor)
+	{
+		xy_t result{};
+		result.x = this->x / divisor;
+		result.y = this->y / divisor;
+		return result;
+	}
+	s_2d_coordinates_cartesian& s_2d_coordinates_cartesian::operator/=(float divisor)
+	{
+		this->x /= divisor;
+		this->y /= divisor;
+		return *this;
+	}
 	c_3d_vector::c_3d_vector()
 		: c_3d_vector(0.0f, 0.0f, 0.0f)
 	{
@@ -294,5 +357,38 @@ namespace owd
 	//	}
 	//	//m_mtx.unlock();
 	//}
+	static glm::mat4* glm_mat4(void* data)
+	{
+		return reinterpret_cast<glm::mat4*>(data);
+	}
+	c_mat4::c_mat4()
+		: m_data(new glm::mat4())
+	{
+	}
+
+	c_mat4::~c_mat4()
+	{
+		delete glm_mat4(m_data);
+	}
+
+	void* c_mat4::operator()()
+	{
+		auto result = &(glm_mat4(m_data)[0][0]);
+		return result;
+	}
+
+	void c_mat4::set_aspect_ratio(float aspect_ratio)
+	{
+		*glm_mat4(m_data) = glm::ortho_(aspect_ratio);
+	}
+
+	float cos_d(float angle_degrees)
+	{
+		return cosf(angle_degrees * owd::pi_ / 180.0f);
+	}
+	float sin_d(float angle_degrees)
+	{
+		return sinf(angle_degrees * owd::pi_ / 180.0f);
+	}
 
 }

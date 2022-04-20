@@ -98,7 +98,7 @@ namespace owd
     };
 
     template<class T>
-    std::shared_ptr<T> c_object_bank<T>::m_empty_object{ L"empty_object" };
+    std::shared_ptr<T> c_object_bank<T>::m_empty_object{};
 
     template<class T>
     c_object_bank<T>::c_object_bank()

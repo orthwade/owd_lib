@@ -3,6 +3,48 @@
 
 namespace owd
 {
+	float cos_d(float angle_degrees);
+	float sin_d(float angle_degrees);
+
+	typedef std::array<float, 3> xyz_t; // array of space coordinates in Cartesian coordinate system
+
+    /// <summary>
+    /// array of orientaion coordinates in Cartesian coordinate system, 
+    /// elements 0-2 are vector pointing where the object is "looking at"
+    /// elements 3-5 are vector pointing whre the top of the object is pointing
+    /// </summary>
+    typedef std::array<float, 6> ori_t;
+
+	struct s_2d_coordinates_cartesian
+	{
+		s_2d_coordinates_cartesian();
+		s_2d_coordinates_cartesian(float x, float y);
+
+		s_2d_coordinates_cartesian  operator+ (const s_2d_coordinates_cartesian& other);
+		s_2d_coordinates_cartesian& operator+=(const s_2d_coordinates_cartesian& other);
+		s_2d_coordinates_cartesian  operator- (const s_2d_coordinates_cartesian& other);
+		s_2d_coordinates_cartesian& operator-=(const s_2d_coordinates_cartesian& other);
+		s_2d_coordinates_cartesian  operator* (float multilpier);
+		s_2d_coordinates_cartesian& operator*=(float multilpier);
+		s_2d_coordinates_cartesian  operator/ (float divisor);
+		s_2d_coordinates_cartesian& operator/=(float divisor);
+
+		float x{};
+		float y{};
+	};
+
+	typedef s_2d_coordinates_cartesian xy_t;
+
+	class c_mat4
+	{
+	public:
+		c_mat4();
+		~c_mat4();
+		void* operator()();
+		void set_aspect_ratio(float aspect_ratio);
+	private:
+		void* m_data;
+	};
 	/// <summary>
 	/// Object of a 3D-space vector with elements x, y, z.
 	/// </summary>

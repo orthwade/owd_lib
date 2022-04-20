@@ -1,8 +1,12 @@
+#pragma comment(lib, "opengl32.lib")
+#pragma comment(lib, "glew32s.lib")
+#pragma comment(lib, "glfw3.lib")
 #include <stdint.h>
 #include <iostream>
 #include <string>
 #include <io.h>
 #include <fcntl.h>
+#include <thread>
 
 #include <owd_misc.h>
 #include <owd_strings.h>
@@ -10,12 +14,15 @@
 #include <owd_debug.h>
 #include <owd_sound.h>
 #include <owd_filesystem.h>
+#include <owd_graphics.h>
 
 #pragma comment(lib, "owd_misc.lib")
 
 int32_t main()
 {
 	static auto setmode_result = _setmode(_fileno(stdout), _O_WTEXT);
+	owd::c_logger::set_global_mode_override(0);
+	owd::c_logger::enable_global_mode_override();
 	//const char* c_str_1		= "UTF-8 char string";
 	//const wchar_t* wc_str_1 = L"UNICODE char string ¿¡¿œ»¡¡";
 	//std::wstring wstring_	= L"UNICODE string ‘€¬ ‘€";
@@ -85,9 +92,11 @@ int32_t main()
 	sound_1.set_position(-1.0f, 0.0f, -9.0f);
 	sound_1.set_gain(0.99f);
 	sound_1.enable({ L"sample1" });
-	std::cin.get();
-	sound_1.stop();
+	auto lambda_ = [&]() 
+	{ owd::c_graphic_unit unit{ 0.0f, 0.1f, 0.2f, 0.2f, 1.0f, 1.0f, 1.0f, 1.0f, 1 }; while (true) {}};
+	auto thread_ = std::thread(lambda_);
 
+	owd::run();
 
 
 

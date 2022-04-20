@@ -160,6 +160,9 @@
     <ProjectReference Include="..\owd_filesystem\owd_filesystem.vcxproj">
       <Project>{42e98003-5dc3-49ba-a7a9-52d084735ae7}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\owd_graphics\owd_graphics.vcxproj">
+      <Project>{2cdda50d-fc14-4032-9254-9178e724dd57}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\owd_math\owd_math.vcxproj">
       <Project>{5b92b9b0-da43-48ea-814c-ae0e3626890d}</Project>
     </ProjectReference>

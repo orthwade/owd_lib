@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\owd_graphics_.h" />
+    <ClInclude Include="src\batches\c_batch_handler.h" />
+    <ClInclude Include="src\batches\c_graphic_batch.h" />
+    <ClInclude Include="src\batches\c_graphic_batch_textured.h" />
+    <ClInclude Include="src\batches\c_graphic_unit.h" />
+    <ClInclude Include="src\batches\c_graphic_unit_textured.h" />
+    <ClInclude Include="src\c_colour_uniform.h" />
+    <ClInclude Include="src\c_glsl_uniform.h" />
+    <ClInclude Include="src\c_graphic_engine.h" />
+    <ClInclude Include="src\c_index_buffer.h" />
+    <ClInclude Include="src\c_mat4_uniform.h" />
+    <ClInclude Include="src\c_shader.h" />
+    <ClInclude Include="src\c_shader_bank.h" />
+    <ClInclude Include="src\c_texture.h" />
+    <ClInclude Include="src\c_texture_bank.h" />
+    <ClInclude Include="src\c_texture_uniform.h" />
+    <ClInclude Include="src\c_vertex_array.h" />
+    <ClInclude Include="src\c_vertex_buffer.h" />
+    <ClInclude Include="src\c_vertex_buffer_element.h" />
+    <ClInclude Include="src\c_vertex_buffer_layout.h" />
+    <ClInclude Include="src\c_window.h" />
+    <ClInclude Include="src\opengl\glew.h" />
+    <ClInclude Include="src\opengl\glfw3.h" />
+    <ClInclude Include="src\opengl\opengl.h" />
+    <ClInclude Include="src\owd_static_lib_template_src.h" />
+    <ClInclude Include="src\stb_image\stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\owd_graphics_.cpp" />
+    <ClCompile Include="src\batches\c_batch_handler.cpp" />
+    <ClCompile Include="src\batches\c_graphic_batch.cpp" />
+    <ClCompile Include="src\batches\c_graphic_batch_textured.cpp" />
+    <ClCompile Include="src\batches\c_graphic_unit.cpp" />
+    <ClCompile Include="src\batches\c_graphic_unit_textured.cpp" />
+    <ClCompile Include="src\c_colour_uniform.cpp" />
+    <ClCompile Include="src\c_glsl_uniform.cpp" />
+    <ClCompile Include="src\c_graphic_engine.cpp" />
+    <ClCompile Include="src\c_index_buffer.cpp" />
+    <ClCompile Include="src\c_mat4_uniform.cpp" />
+    <ClCompile Include="src\c_shader.cpp" />
+    <ClCompile Include="src\c_shader_bank.cpp" />
+    <ClCompile Include="src\c_texture.cpp" />
+    <ClCompile Include="src\c_texture_bank.cpp" />
+    <ClCompile Include="src\c_texture_uniform.cpp" />
+    <ClCompile Include="src\c_vertex_array.cpp" />
+    <ClCompile Include="src\c_vertex_buffer.cpp" />
+    <ClCompile Include="src\c_vertex_buffer_element.cpp" />
+    <ClCompile Include="src\c_vertex_buffer_layout.cpp" />
+    <ClCompile Include="src\c_window.cpp" />
+    <ClCompile Include="src\opengl\opengl.cpp" />
+    <ClCompile Include="src\stb_image\stb_image.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\owd_debug\owd_debug.vcxproj">
+      <Project>{decf197b-b0e1-4d2c-9b0f-8f9a66bac02c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\owd_filesystem\owd_filesystem.vcxproj">
+      <Project>{42e98003-5dc3-49ba-a7a9-52d084735ae7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\owd_math\owd_math.vcxproj">
+      <Project>{5b92b9b0-da43-48ea-814c-ae0e3626890d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\owd_misc\owd_misc.vcxproj">
+      <Project>{b71662a3-4fed-4320-ad0d-e641f5358fa6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\owd_strings\owd_strings.vcxproj">
+      <Project>{21786f17-fefb-4b31-87d4-548eef0f98a2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\owd_time\owd_time.vcxproj">
+      <Project>{cfb283bf-907b-4492-8a79-555e3d91245a}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{2cdda50d-fc14-4032-9254-9178e724dd57}</ProjectGuid>
+    <RootNamespace>owd_graphics</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)lib\
+mkdir $(SolutionDir)include\
+del "$(SolutionDir)include\$(ProjectName).h"
+XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)lib\
+mkdir $(SolutionDir)include\
+del "$(SolutionDir)include\$(ProjectName).h"
+XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)lib\
+mkdir $(SolutionDir)include\
+del "$(SolutionDir)include\$(ProjectName).h"
+XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)lib\
+mkdir $(SolutionDir)include\
+del "$(SolutionDir)include\$(ProjectName).h"
+XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
+rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

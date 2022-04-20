@@ -7,6 +7,11 @@
 
 namespace owd
 {
+	constexpr uint16_t logger_mode_none		= 0;
+	constexpr uint16_t logger_mode_console	= 1;
+	constexpr uint16_t logger_mode_textfile = 2;
+	constexpr uint16_t logger_mode_both		= 3;
+
 	class c_logger
 	{
 	public:
