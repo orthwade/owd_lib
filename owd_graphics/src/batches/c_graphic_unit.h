@@ -74,14 +74,14 @@ namespace owd_lib
 
 		inline bool deleted() const { return m_state == enm_state::deleted; }
 
-		inline s_colour& colour() { wait_init(); return m_colour; }
+		inline s_colour& colour() { return m_colour; }
 
-		inline uint16_t level() { wait_init(); return m_level; }
+		inline uint16_t level() { return m_level; }
 
 		static std::shared_ptr<c_graphic_unit_lib>& empty_unit();
 		static owd::xy_t centre(const vertices_t& vertex_positions, const gl_indices_t& indices);
 		
-		inline owd::xy_t& centre() { wait_init(); return m_centre; }
+		inline owd::xy_t& centre() { return m_centre; }
 
 	private:
 		static GLint  m_max_vertices;
@@ -90,7 +90,6 @@ namespace owd_lib
 
 		static std::shared_ptr<c_graphic_unit_lib> m_empty_unit;
 
-		std::atomic_bool m_initialized = false;
 		uint16_t m_level = 0;
 
 		vertices_t   m_vertex_positions{};
@@ -100,6 +99,5 @@ namespace owd_lib
 		s_colour m_colour{};
 
 		enm_state m_state = enm_state::not_init;
-		bool wait_init();
 	};
 }

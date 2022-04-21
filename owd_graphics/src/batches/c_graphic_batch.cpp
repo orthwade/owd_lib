@@ -29,6 +29,7 @@ namespace owd_lib
     void c_graphic_batch::draw()
     {
         m_vertex_array.bind();
+        m_index_buffer.bind();
         update();
         GL_CALL(glDrawElements(GL_TRIANGLES, indices_count(), GL_UNSIGNED_INT, nullptr));
     }

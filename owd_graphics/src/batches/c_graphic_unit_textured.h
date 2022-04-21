@@ -80,8 +80,6 @@ namespace owd_lib
 
 		static std::shared_ptr<c_graphic_unit_textured> m_empty_unit;
 
-		std::atomic_bool m_initialized = false;
-
 		uint16_t m_level = 0;
 
 		float m_x{ -0.5f };
@@ -98,9 +96,6 @@ namespace owd_lib
 		s_colour m_colour{};
 
 		enm_state m_state{ enm_state::not_init };
-
-		bool wait_init();
-
 	};
 
 	typedef std::shared_ptr<c_graphic_unit_textured> g_unit_textured_t;

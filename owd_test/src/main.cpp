@@ -21,7 +21,7 @@
 int32_t main()
 {
 	static auto setmode_result = _setmode(_fileno(stdout), _O_WTEXT);
-	owd::c_logger::set_global_mode_override(0);
+	owd::c_logger::set_global_mode_override(1);
 	owd::c_logger::enable_global_mode_override();
 	//const char* c_str_1		= "UTF-8 char string";
 	//const wchar_t* wc_str_1 = L"UNICODE char string ¿¡¿œ»¡¡";
@@ -91,9 +91,15 @@ int32_t main()
 	sound_1.load_sound(L"C:/Users/boba/Downloads/Rear_left.ogg", L"sample1");
 	sound_1.set_position(-1.0f, 0.0f, -9.0f);
 	sound_1.set_gain(0.99f);
+	
+	
+	auto lambda_ = [&]()
+	{ owd::c_graphic_unit unit{ 0.0f, 0.1f, 0.2f, 0.2f, 1.0f, 1.0f, 1.0f, 1.0f, 1 }; 
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	sound_1.enable({ L"sample1" });
-	auto lambda_ = [&]() 
-	{ owd::c_graphic_unit unit{ 0.0f, 0.1f, 0.2f, 0.2f, 1.0f, 1.0f, 1.0f, 1.0f, 1 }; while (true) {}};
+	owd::load_texture(L"rsc/textures/a_orange.png", L"A orange");
+	owd::c_graphic_unit unit_t_1{ 0.5f, 0.0f, 0.2f, 0.2f, L"A orange", 2 };
+	while (true) {}};
 	auto thread_ = std::thread(lambda_);
 
 	owd::run();

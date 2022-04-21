@@ -90,12 +90,14 @@ namespace owd_lib
     void* c_batch_handler::add(const std::vector<float>& positions, const std::vector<uint32_t>& indices,
         float r, float g, float b, float a, uint16_t l)
     {
+        void* result = nullptr;
         auto unit = std::make_shared<c_graphic_unit_lib>(positions, indices, r, g, b, a, l);
         {
             std::lock_guard lock{ m_mtx };
             m_list_unit.push_back(unit);
+            result = m_list_unit.back().get();
         }
-        return unit.get();
+        return result;
     }
 
     void* c_batch_handler::add(float x, float y, float w, float h,
@@ -162,7 +164,7 @@ namespace owd_lib
         std::wstring_view t, uint16_t l)
     {
         void* result = nullptr;
-        auto texture = c_texture_bank::get_instance()->by_name(t);
+        auto texture = c_texture_bank::get_instance()->get(t);
         auto unit = std::make_shared<c_graphic_unit_textured>(x, y, w, h, texture, l);
         {
             std::lock_guard lock{ m_mtx };
@@ -205,6 +207,7 @@ namespace owd_lib
                 m_levels[i].batches[ii]->draw();
             }
             m_shader_textured->bind();
+
             for (index_t ii = 0; ii != m_levels[i].batches_textured.size(); ++ii)
             {
                 m_levels[i].batches_textured[ii]->draw();

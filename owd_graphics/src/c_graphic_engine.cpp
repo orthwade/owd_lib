@@ -153,6 +153,7 @@ namespace owd_lib
 		//m_rects.draw();
 		//m_circles.draw();
 		//m_rects_textured.draw();
+		m_texture_bank.update_main_thread();
 		m_batch_handler.update();
 		m_batch_handler.draw();
 		//m_test_imgui.update_window();

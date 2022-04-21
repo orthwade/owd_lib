@@ -114,10 +114,10 @@ namespace owd_lib
 		/// </summary>
 		/// <param name="filepath"></param>
 		/// <returns></returns>
-		inline bool load_texture(std::wstring_view filepath)
+		/*inline bool load_texture(std::wstring_view filepath)
 		{
 			return m_texture_bank.load(filepath);
-		}
+		}*/
 
 		inline texture_t& load_and_get_texture(std::wstring_view filepath)
 		{

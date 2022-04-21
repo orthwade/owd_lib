@@ -55,7 +55,7 @@ namespace owd_lib
 
 	void c_graphic_unit_lib::set(const vertices_t& vertex_positions, const gl_indices_t& indices)
 	{
-		wait_init();
+		
 		m_vertex_positions = vertex_positions;
 		m_indices  = indices;
 		m_centre = centre(vertex_positions, indices);
@@ -78,7 +78,7 @@ namespace owd_lib
 	void c_graphic_unit_lib::set(const vertices_t& vertex_positions, const gl_indices_t& indices, 
 		float red, float green, float blue, float alpha)
 	{
-		wait_init();
+		
 		m_vertex_positions = vertex_positions;
 		m_indices = indices;
 		m_colour = { red, green, blue, alpha };
@@ -105,7 +105,7 @@ namespace owd_lib
 
 	void c_graphic_unit_lib::set(float centre_x, float centre_y, float red, float green, float blue, float alpha)
 	{
-		wait_init();
+		
 		m_colour = { red, green, blue, alpha };
 
 		owd::index_t vertex_positions_index = 0;
@@ -135,7 +135,7 @@ namespace owd_lib
 
 	void c_graphic_unit_lib::set_position(float centre_x, float centre_y)
 	{
-		wait_init();
+		
 		owd::index_t vertex_positions_index = 0;
 		owd::index_t vertices_index = 0;
 
@@ -159,7 +159,7 @@ namespace owd_lib
 
 	void c_graphic_unit_lib::move(float delta_x, float delta_y)
 	{
-		wait_init();
+		
 		owd::index_t vertex_positions_index = 0;
 		owd::index_t vertices_index = 0;
 
@@ -180,7 +180,7 @@ namespace owd_lib
 
 	void c_graphic_unit_lib::resize(float size_multiplier)
 	{
-		wait_init();
+		
 		owd::index_t vertex_positions_index = 0;
 		owd::index_t vertices_index = 0;
 
@@ -209,7 +209,7 @@ namespace owd_lib
 
 	void c_graphic_unit_lib::set_colour(float red, float green, float blue, float alpha)
 	{
-		wait_init();
+		
 		m_colour = { red, green, blue, alpha };
 
 		owd::index_t vertex_positions_index = 0;
@@ -270,30 +270,5 @@ namespace owd_lib
 		result /= static_cast<float>(indices_count);
 
 		return result;
-	}
-	bool c_graphic_unit_lib::wait_init()
-	{
-		std::mutex mtx{};
-		return true;
-		auto state = enm_state::not_init;
-		while (true)
-		{
-			mtx.lock();
-			{
-				state = m_state;
-				if (state == enm_state::deleted)
-				{
-					mtx.unlock();
-					return false;
-				}
-				else if (state == enm_state::good)
-				{
-					mtx.unlock();
-					break;
-				}
-			}
-			mtx.unlock();
-		}
-		return true;
 	}
 }

@@ -31,6 +31,7 @@ namespace owd_lib
     {
         m_vertex_array.bind();
         m_index_buffer.bind();
+
         update();
         for (index_t i = 0; i != m_vec.size(); ++i)
         {

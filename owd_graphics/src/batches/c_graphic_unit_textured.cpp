@@ -124,28 +124,4 @@ namespace owd_lib
 
 		return result;
 	}
-	bool c_graphic_unit_textured::wait_init()
-	{
-		std::mutex mtx{};
-		auto state = enm_state::not_init;
-		while (true)
-		{
-			mtx.lock();
-			{
-				state = m_state;
-				if (state == enm_state::deleted)
-				{
-					mtx.unlock();
-					return false;
-				}
-				else if (state == enm_state::good)
-				{
-					mtx.unlock();
-					break;
-				}
-			}
-			mtx.unlock();
-		}
-		return true;
-	}
 }
