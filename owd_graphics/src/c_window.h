@@ -43,7 +43,7 @@ namespace owd_lib
 
 	protected:
 		GLFWwindow* m_glfw_window = nullptr;
-
+		std::thread m_thread{};
 		int m_w = 960;
 		int m_h = 540;
 

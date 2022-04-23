@@ -30,18 +30,4 @@ namespace owd
 		void* m_data;
 	};
 
-	class c_frame_timer
-	{
-	public:
-		static c_frame_timer* get_instance();
-		static void terminate();
-
-		void wait_frame();
-
-		void set_fps(float fps);
-
-	private:
-		static c_frame_timer* m_singleton;
-	};
-
 }

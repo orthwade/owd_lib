@@ -7,6 +7,7 @@
 #include <io.h>
 #include <fcntl.h>
 #include <thread>
+#include <mutex>
 
 #include <owd_misc.h>
 #include <owd_strings.h>
@@ -99,11 +100,38 @@ int32_t main()
 	sound_1.enable({ L"sample1" });
 	owd::load_texture(L"rsc/textures/a_orange.png", L"A orange");
 	owd::c_graphic_unit unit_t_1{ 0.5f, 0.0f, 0.2f, 0.2f, L"A orange", 2 };
-	while (true) {}};
+	float delta_x = 0.001f;
+	float delta_y = 0.001f;
+	std::mutex mtx{};
+	while (true) 
+	{ 
+		auto f_t = unit_t_1.y();
+
+		if (unit_t_1.y() < -1.0f)
+		{
+			delta_y *= -1;
+		}
+		else if(unit_t_1.y() > 1.0f)
+		{
+			delta_y *= -1;
+		}
+		if (unit_t_1.x() < -1.0f)
+		{
+			delta_x *= -1;
+		}
+		else if (unit_t_1.x() > 1.0f)
+		{
+			delta_x *= -1;
+		}
+		owd::sleep_for_ms(1); unit_t_1.move(delta_x, delta_y); 
+	}};
 	auto thread_ = std::thread(lambda_);
 
 	owd::run();
-
+	while (true)
+	{
+		owd::sleep_for_ms(1);
+	}
 
 
 	return 0;

@@ -88,6 +88,9 @@ namespace owd
 
 		enm_graphic_unit type();
 
+		float x();
+		float y();
+
 		void resize(float multiplier);
 
 		void set_position(float x, float y);

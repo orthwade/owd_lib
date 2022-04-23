@@ -64,6 +64,30 @@ namespace owd
 		return m_type;
 	}
 
+	float c_graphic_unit::x()
+	{
+		if (m_type == coloured_unit)
+		{
+			return lib_coloured(m_data)->centre().x;
+		}
+		else
+		{
+			return lib_textured(m_data)->centre().x;
+		}
+	}
+
+	float c_graphic_unit::y()
+	{
+		if (m_type == coloured_unit)
+		{
+			return lib_coloured(m_data)->centre().y;
+		}
+		else
+		{
+			return lib_textured(m_data)->centre().y;
+		}
+	}
+
 	void c_graphic_unit::resize(float multiplier)
 	{
 		if (m_type == coloured_unit)
