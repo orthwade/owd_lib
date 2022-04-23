@@ -1,6 +1,8 @@
 #include "owd_graphics_.h"
 #include "../src/c_graphic_engine.h"
 
+
+
 static auto static_graphic_engine	= owd_lib::c_graphic_engine	::get_instance();
 static auto static_texture_bank		= owd_lib::c_texture_bank	::get_instance();
 static auto static_batch_handler	= owd_lib::c_batch_handler	::get_instance();

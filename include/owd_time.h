@@ -1,6 +1,13 @@
 #pragma once
 #include <string_view>
 
+#ifdef _WIN32
+#include <Windows.h>
+#pragma comment(lib, "Winmm.lib")
+#else
+#include <>
+#endif // _WIN32
+
 namespace owd
 {
 	std::string time_date();
@@ -21,6 +28,20 @@ namespace owd
 		~c_async_timer();
 	private:
 		void* m_data;
+	};
+
+	class c_frame_timer
+	{
+	public:
+		static c_frame_timer* get_instance();
+		static void terminate();
+
+		void wait_frame();
+
+		void set_fps(float fps);
+
+	private:
+		static c_frame_timer* m_singleton;
 	};
 
 }

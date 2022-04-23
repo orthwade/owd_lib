@@ -72,6 +72,8 @@ namespace owd_lib
 		
 		owd::c_async_timer m_async_timer{};
 
+		void wait_frame(int32_t ms);
+
 		static c_window* m_singleton;
 
 		c_window();

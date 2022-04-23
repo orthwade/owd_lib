@@ -1,7 +1,8 @@
 #include "c_window.h"
-
+#include <stdio.h>
 #ifdef _WIN32
 #include <Windows.h>
+#include <timeapi.h>
 #else
 #include <unistd.h>
 #endif
@@ -49,7 +50,7 @@ namespace owd_lib
 	}
 	uint64_t c_window::refresh_period_mcs_int()
 	{
-		return static_cast<uint64_t>(1000000.0f / m_fps);
+		return static_cast<uint64_t>(1000000.0f / (m_fps + 1));
 	}
 	float c_window::refresh_period_s()
 	{
@@ -81,7 +82,8 @@ namespace owd_lib
 	{
 		m_logger << "----Window running----\n";
 		//m_logger << L"----Òåñò ÚúÚúúÚú----\n";
-		
+		auto ttt = timeBeginPeriod(1);
+		m_frame_start_time = std::chrono::high_resolution_clock::now();
 		while (true)
 		{
 			if (glfwWindowShouldClose(m_glfw_window))
@@ -98,12 +100,16 @@ namespace owd_lib
 					m_draw();
 					
 					m_async_timer.wait();
+					m_frame_end_time = std::chrono::high_resolution_clock::now();
+					//int32_t sleep_ms = (m_frame_end_time - m_frame_start_time).count() / 1000 / m_fps;
+					//Sleep(sleep_ms);
 					/* Swap front and back buffers */
 					glfwSwapBuffers(m_glfw_window);
 
 					/* Poll for and process events */
 					glfwPollEvents();
-					m_async_timer.start(refresh_period_mcs_int());
+					m_frame_start_time = std::chrono::high_resolution_clock::now();
+					m_async_timer.start(refresh_period_ms_int());
 				}
 				//m_draw_mutex.unlock();
 			}
@@ -160,7 +166,11 @@ namespace owd_lib
 			m_singleton = nullptr;
 		}
 	}
-    c_window::c_window()
+	void c_window::wait_frame(int32_t ms)
+	{
+		Sleep(ms);
+	}
+	c_window::c_window()
     {
 		set_name(L"window");
 		m_logger.set_name(L"window_logger");

@@ -1,5 +1,5 @@
 #include "c_texture_bank.h"
-
+#include <owd_time.h>
 namespace owd_lib
 {
 	c_texture_bank* c_texture_bank::m_singleton = nullptr;
@@ -130,7 +130,7 @@ namespace owd_lib
 	{
 		while (m_should_update)
 		{
-
+			owd::sleep_for_ms(1);
 		}
 	}
 	c_texture_bank::c_texture_bank()

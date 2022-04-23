@@ -7,6 +7,12 @@
 #include <owd_strings.h>
 #include <owd_debug.h>
 
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
+
 namespace owd
 {
     typedef uint64_t index_t;

@@ -2,6 +2,7 @@
 #include "../src/time_date.h"
 #include "../src/c_sleep_for.h"
 #include "../src/c_async_timer.h"
+static auto set_time_resolution = timeBeginPeriod(1);
 
 std::string owd::time_date()
 {
@@ -29,8 +30,11 @@ std::string owd::date()
 
 void owd::sleep_for_ms(size_t count)
 {
-    owd_lib::c_sleep_for_ms s_{};
-    s_(count);
+#ifdef _WIN32
+    Sleep(count);
+#else
+
+#endif // _WIN32
 }
 
 owd_lib::c_async_timer_lib* async_timer_lib(void* data)
@@ -90,3 +94,9 @@ owd::c_async_timer::~c_async_timer()
 {
     terminate();
 }
+
+namespace owd
+{
+   
+}
+

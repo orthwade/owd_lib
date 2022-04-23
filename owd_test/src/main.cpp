@@ -21,7 +21,7 @@
 int32_t main()
 {
 	static auto setmode_result = _setmode(_fileno(stdout), _O_WTEXT);
-	owd::c_logger::set_global_mode_override(1);
+	owd::c_logger::set_global_mode_override(0);
 	owd::c_logger::enable_global_mode_override();
 	//const char* c_str_1		= "UTF-8 char string";
 	//const wchar_t* wc_str_1 = L"UNICODE char string ¿¡¿œ»¡¡";

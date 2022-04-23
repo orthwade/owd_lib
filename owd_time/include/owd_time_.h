@@ -1,6 +1,13 @@
 #pragma once
 #include <string_view>
 
+#ifdef _WIN32
+#include <Windows.h>
+#pragma comment(lib, "Winmm.lib")
+#else
+#include <>
+#endif // _WIN32
+
 namespace owd
 {
 	std::string time_date();
