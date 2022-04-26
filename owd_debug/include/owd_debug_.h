@@ -12,6 +12,10 @@ namespace owd
 	constexpr uint16_t logger_mode_textfile = 2;
 	constexpr uint16_t logger_mode_both		= 3;
 
+	/// <summary>
+	/// Logger object used for tweaked combined output to console or textfile.
+	/// 
+	/// </summary>
 	class c_logger
 	{
 	public:
@@ -27,6 +31,15 @@ namespace owd
 
 		static void enable_global_mode_override();
 		static void disable_global_mode_override();
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="mode">
+		/// 0: none
+		/// 1: console
+		/// 2: text file
+		/// 3: console and text file</param>
 		static void set_global_mode_override(uint16_t mode);
 
 		c_logger& operator<<(uint8_t  input);

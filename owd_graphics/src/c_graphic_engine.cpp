@@ -11,11 +11,13 @@ namespace owd_lib
 		ASSERT(glfw_init_result == GLFW_TRUE);
 		owd::c_logger logger{ L"opengl initializer" };
 		logger << "---- OpenGL initialization START----\n";
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+		//glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_SAMPLES, 4);
-
+		//glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		auto window_ptr = c_window::get_instance();
 
 		glewExperimental = GL_TRUE;
@@ -86,63 +88,11 @@ namespace owd_lib
 				break;
 			}
 
-			//m_test_imgui.init(m_window.glfw_window());
-
 			m_draw_function_delegate = std::bind(&c_graphic_engine::default_draw_function, this);
 
 			m_window.set_program(m_draw_function_delegate);
 
-			//m_test_imgui.add_slider(m_rect_x, -1.0f, 1.0f, L"Компьютер X");
-			//m_test_imgui.add_checkbox(c_logger::log_mode_override_enabled, L"log_mode_override");
-			/*m_test_imgui.add_listbox
-			({ enm_log_mode::none, enm_log_mode::both, enm_log_mode::console, enm_log_mode::file },
-				c_logger::log_mode_override, { L"none", L"console_and_file", L"console", L"file" },
-				L"log_mode_override");*/
-
-			/*load_shader(L"rsc/shaders/batch_coloured.glsl", L"batch_coloured");
-
-			c_files_in_directory files_in_directory{};
-			
-			auto &numbers = files_in_directory(L"rsc/textures/numbers/");
-			float x = -1.0f;
-			float y =  1.0f;
-			float delta_x = 2.0f / (12 - 1);
-			float delta_y = 2.0f / (12 - 1);
-			x += delta_x;
-			y += -delta_y;
-			float w = delta_x;
-			float h = delta_y;
-			delta_y *= 1.1f;
-			for (index_t i = 0; i != numbers.size(); ++i)
-			{
-				if (x > 1.0f - delta_x)
-				{
-					x = -1.0f + delta_x;
-					y += -delta_y;
-				}
-				load_texture(numbers[i]);
-				m_rects_textured.add(norm_x(x), y, w, h, m_texture_bank.last());
-				x += delta_x;
-			}
-			m_rects_textured.erase(1);
-
-			m_circles.add(0.3f, 0.5f, 0.2f, 0.7f, 0.7f, 1.0f, 1.0f);
-			m_circles.add(-0.2f, 0.8f, 0.2f, 0.9f, 0.7f, 0.0f, 1.0f);
-			m_circles.add(-0.3f, 0.2f, 0.2f, 0.1f, 0.7f, 0.5f, 1.0f);
-			m_circles.add(-0.6f, -0.2f, 0.3f, 0.2f, 0.4f, 0.5f, 1.0f);
-			m_circles.add(-0.5f, -0.7f, 0.15f, 0.4f, 0.4f, 0.5f, 1.0f);
-			m_circles.add(0.5f, 0.1f, 0.15f, 0.4f, 0.9f, 0.5f, 1.0f);
-			m_rects.add(0.5f, 0.1f, 0.15f, 0.9f, 0.2f, 0.3f, 0.5f, 1.0f);*/
-			//add_rect(0.5f, 0.1f, 0.15f, 0.9f, 0.2f, 0.3f, 0.5f, 1.0f, 1);
-			//add_rect(-0.5f, 0.1f, 0.25f, 0.9f, 0.3f, 0.3f, 0.5f, 1.0f, 0);
-			//
-			//add_circle(0.5f, 0.0f, 0.15f, 0.4f, 0.9f, 0.5f, 1.0f, 0);
-			//add_rect(0.0f, 0.5f, 0.3f, 0.3f, 0.9f, 0.3f, 0.5f, 1.0f, 0);
-			//load_texture(L"rsc/textures/e_green.png");
-			//add_textured(0.5f, 0.0f, 0.7f, 0.7f, m_texture_bank.last(), 2);
 			enable_imgui(false);
-
-
 		}
 		m_logger << "----c_graphic_engine initializing OK----\n";
 	}

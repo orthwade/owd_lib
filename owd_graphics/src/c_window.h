@@ -44,6 +44,7 @@ namespace owd_lib
 	protected:
 		GLFWwindow* m_glfw_window = nullptr;
 		std::thread m_thread{};
+		float m_refrash_rate = 60.0f;
 		int m_w = 960;
 		int m_h = 540;
 

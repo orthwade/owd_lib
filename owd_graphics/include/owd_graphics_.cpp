@@ -126,9 +126,13 @@ namespace owd
 
 	void run()
 	{
+		auto static_graphic_engine = owd_lib::c_graphic_engine::get_instance();
 		static_graphic_engine->run();
 	}
-
+	void terminate()
+	{
+		static_graphic_engine->terminate();
+	}
 	void load_texture(std::wstring_view filepath, std::wstring_view name)
 	{
 		static_texture_bank->load(filepath, name);

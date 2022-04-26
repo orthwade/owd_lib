@@ -5,6 +5,7 @@
 namespace owd
 {
 	void run();
+	void terminate();
 
 	void load_texture(std::wstring_view filepath, std::wstring_view name);
 	void remove_texture(std::wstring_view name);

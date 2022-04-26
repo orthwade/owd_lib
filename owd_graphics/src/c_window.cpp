@@ -80,12 +80,15 @@ namespace owd_lib
 	}
 	void c_window::run()
 	{
+		std::mutex mtx{};
+
 		m_logger << "----Window running----\n";
 		//m_logger << L"----Òåñò ÚúÚúúÚú----\n";
 		auto ttt = timeBeginPeriod(1);
-		m_frame_start_time = std::chrono::high_resolution_clock::now();
+		//m_frame_start_time = std::chrono::high_resolution_clock::now();
 		while (true)
 		{
+			std::lock_guard lock(mtx);
 			if (glfwWindowShouldClose(m_glfw_window))
 			{
 				m_logger << "----Window closing----\n";
@@ -99,8 +102,8 @@ namespace owd_lib
 					
 					m_draw();
 					
-					m_async_timer.wait();
-					m_frame_end_time = std::chrono::high_resolution_clock::now();
+					//m_async_timer.wait();
+					//m_frame_end_time = std::chrono::high_resolution_clock::now();
 					//int32_t sleep_ms = (m_frame_end_time - m_frame_start_time).count() / 1000 / m_fps;
 					//Sleep(sleep_ms);
 					/* Swap front and back buffers */
@@ -108,8 +111,8 @@ namespace owd_lib
 
 					/* Poll for and process events */
 					glfwPollEvents();
-					m_frame_start_time = std::chrono::high_resolution_clock::now();
-					m_async_timer.start(refresh_period_ms_int());
+					//m_frame_start_time = std::chrono::high_resolution_clock::now();
+					//m_async_timer.start(refresh_period_ms_int());
 				}
 				//m_draw_mutex.unlock();
 			}
@@ -139,7 +142,7 @@ namespace owd_lib
 	{
 		//m_mtx.lock();
 		{
-
+			glViewport(0, 0, fbW, fbH);
 		}
 		//m_mtx.unlock();
 	}
@@ -178,7 +181,11 @@ namespace owd_lib
 		{
 			m_logger << "Initializing window\n";
 
-			m_glfw_window = glfwCreateWindow(m_w, m_h, "default glfw window", NULL, NULL);
+			GLFWmonitor* primary = glfwGetPrimaryMonitor();
+			const GLFWvidmode* mode = glfwGetVideoMode(primary);
+			//m_w = mode->width;
+			//m_h = mode->height;
+			m_glfw_window = glfwCreateWindow(m_w, m_h, "default glfw window", nullptr, NULL);
 
 			if (m_glfw_window == NULL)
 			{
@@ -186,9 +193,15 @@ namespace owd_lib
 			}
 
 			glfwMakeContextCurrent(m_glfw_window);
+			
+			int32_t interval = 0;
+			while (interval * 60 < mode->refreshRate)
+			{
+				++interval;
+			}
 
-			glfwSwapInterval(0);
-
+			glfwSwapInterval(interval);
+			glfwSetFramebufferSizeCallback(m_glfw_window, global_frame_buffer_resize_callback);
 			//auto mm = glfwGetVideoMode(glfwGetPrimaryMonitor());
 			//int32_t i{};
 		}

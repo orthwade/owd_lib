@@ -58,7 +58,6 @@ namespace owd_lib
 
         m_projection.set_aspect_ratio(m_window->aspect_ratio());
         m_mat4_uniform_coloured.init(m_shader_coloured->shader_program_id(), m_projection);
-
         // 2. Textured
         shaders->load(L"rsc/shaders/batch_textured.glsl", L"batch_textured");
         m_shader_textured = shaders->by_filepath(L"rsc/shaders/batch_textured.glsl");
