@@ -7,6 +7,10 @@ static auto static_files_in_directory = new owd_lib::c_files_in_directory();
 
 std::wstring_view owd::current_folder()
 {
+    if (static_current_dir == nullptr)
+    {
+        static_current_dir = new owd_lib::c_current_dir();
+    }
     return (*static_current_dir)();
 }
 
