@@ -119,11 +119,13 @@
     </Link>
     <PostBuildEvent>
       <Command>mkdir $(SolutionDir)lib\
+mkdir $(SolutionDir)lib\$(Platform)\
+mkdir $(SolutionDir)lib\$(Platform)\$(Configuration)\
 mkdir $(SolutionDir)include\
 del "$(SolutionDir)include\$(ProjectName).h"
 XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
 rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
-XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\$(Platform)\$(Configuration)\" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,11 +150,13 @@ XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(Solutio
     </Link>
     <PostBuildEvent>
       <Command>mkdir $(SolutionDir)lib\
+mkdir $(SolutionDir)lib\$(Platform)\
+mkdir $(SolutionDir)lib\$(Platform)\$(Configuration)\
 mkdir $(SolutionDir)include\
 del "$(SolutionDir)include\$(ProjectName).h"
 XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
 rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
-XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\$(Platform)\$(Configuration)\" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -173,11 +177,13 @@ XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(Solutio
     </Link>
     <PostBuildEvent>
       <Command>mkdir $(SolutionDir)lib\
+mkdir $(SolutionDir)lib\$(Platform)\
+mkdir $(SolutionDir)lib\$(Platform)\$(Configuration)\
 mkdir $(SolutionDir)include\
 del "$(SolutionDir)include\$(ProjectName).h"
 XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
 rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
-XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\$(Platform)\$(Configuration)\" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -202,11 +208,13 @@ XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(Solutio
     </Link>
     <PostBuildEvent>
       <Command>mkdir $(SolutionDir)lib\
+mkdir $(SolutionDir)lib\$(Platform)\
+mkdir $(SolutionDir)lib\$(Platform)\$(Configuration)\
 mkdir $(SolutionDir)include\
 del "$(SolutionDir)include\$(ProjectName).h"
 XCOPY "$(ProjectDir)include\$(ProjectName)_.h" "$(SolutionDir)include\" /S /Y
 rename "$(SolutionDir)include\$(ProjectName)_.h" $(ProjectName).h
-XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\" /S /Y</Command>
+XCOPY "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).lib" "$(SolutionDir)lib\$(Platform)\$(Configuration)\" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
