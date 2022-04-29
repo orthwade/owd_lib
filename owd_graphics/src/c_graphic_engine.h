@@ -207,7 +207,35 @@ namespace owd_lib
 
 		inline c_batch_handler& get_batch_handler() { return m_batch_handler; }
 
+		float fps();
+
+		bool window_should_close();
+		void update_window();
+		void update_entities();
+
+		void set_entities_wait();
+		void set_entities_ready();
+
+		void set_frame_wait();
+		void set_frame_ready();
+
+		void wait_frame();
+		void wait_entities();
+
 	protected:
+
+		uint8_t m_state_upd = 0;
+		const uint8_t m_state_idle = 0;
+		const uint8_t m_state_upd_entities = 1;
+		const uint8_t m_state_upd_frame = 2;
+
+		//owd::c_async_timer m_async_timer{};
+		std::atomic_bool m_wait_frame = false;
+		std::atomic_bool m_wait_entities = false;
+
+		std::condition_variable m_cond_wait_entities{};
+		std::condition_variable m_cond_wait_frame{};
+
 		owd::c_logger m_logger{ L"graphic_engine_logger" };
 		static std::pair<int32_t, uint32_t> init_opengl();
 		std::pair<int32_t, uint32_t> m_opengl_init_result{};

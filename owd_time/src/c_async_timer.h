@@ -46,13 +46,13 @@ namespace owd_lib
 
 		std::thread m_thread{};
 
-		std::atomic<uint64_t> m_period_ms{};
+		std::atomic<uint64_t> m_period_mcs{};
 		std::mutex m_mtx{};
 		std::condition_variable m_conditional{};
 
-		//std::chrono::steady_clock::time_point m_frame_start_time{};
+		std::chrono::steady_clock::time_point m_frame_start_time{};
 
-		//std::chrono::steady_clock::time_point m_frame_end_time{};
+		std::chrono::steady_clock::time_point m_frame_end_time{};
 
 		uint64_t m_frame_duration_int_ms{};
 		void do_();

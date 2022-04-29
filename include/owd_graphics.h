@@ -20,6 +20,14 @@ namespace owd
 	constexpr enm_graphic_unit coloured_unit = enm_graphic_unit::coloured;
 	constexpr enm_graphic_unit textured_unit = enm_graphic_unit::textured;
 
+	void set_entities_wait();
+	void set_entities_ready();
+
+	void update_window();
+	bool window_should_close();
+
+	void wait_frame();
+	float fps();
 	/// <summary>
 	/// Graphic unit. Coloured rectangle, textured rectangle, coloured 2D-figure.
 	/// </summary>

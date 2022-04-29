@@ -381,6 +381,23 @@ namespace owd
 	{
 		*glm_mat4(m_data) = glm::ortho_(aspect_ratio);
 	}
+	static float constexpr static_float_rand_max = RAND_MAX;
+
+	constexpr float rand_max_float()
+	{
+		return static_float_rand_max;
+	}
+
+	float rand(float min, float max)
+	{
+		float result = min;
+		float delta = max - min;
+		float rand_ = std::rand();
+		rand_ /= rand_max_float();
+		rand_ *= delta;
+		result = min + rand_;
+		return result;
+	}
 
 	float cos_d(float angle_degrees)
 	{

@@ -28,15 +28,10 @@ namespace owd_lib
 		}
 		//m_mtx.unlock();
 	}
-	uint64_t c_window::fps(uint64_t fps)
+	float c_window::fps()
 	{
-		uint64_t result{};
-		//m_mtx.lock();
-		{
-			result = m_fps;
-		}
 		//m_mtx.unlock();
-		return result;
+		return m_fps;
 	}
 	float c_window::refresh_period_mcs()
 	{

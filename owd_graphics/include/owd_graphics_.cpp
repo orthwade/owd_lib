@@ -148,5 +148,35 @@ namespace owd
 		static_texture_bank->clear();
 	}
 
+	void set_entities_wait()
+	{
+		static_graphic_engine->set_entities_wait();
+	}
+
+	void set_entities_ready()
+	{
+		static_graphic_engine->set_entities_ready();
+	}
+
+	void update_window()
+	{
+		static_graphic_engine->update_window();
+	}
+
+	bool window_should_close()
+	{
+		return static_graphic_engine->window_should_close();
+	}
+
+	void wait_frame()
+	{
+		static_graphic_engine->wait_frame();
+	}
+
+	float fps()
+	{
+		return static_graphic_engine->fps();
+	}
+
 
 }

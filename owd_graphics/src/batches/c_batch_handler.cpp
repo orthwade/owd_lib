@@ -227,11 +227,17 @@ namespace owd_lib
         if (units_count_exceeds(batch_, unit))
         {
             batches_.push_back(std::make_shared<c_graphic_batch>());
-            batch_ = batches_.back();
-        }
-        batch_->add(unit);
+            auto& batch_new = batches_.back();
 
-        return batch_->get_last_unit().get();
+            batch_new->add(unit);
+            return batch_new->get_last_unit().get();
+        }
+        else
+        {
+            batch_->add(unit);
+
+            return batch_->get_last_unit().get();
+        }
     }
     void* c_batch_handler::add_main_thread(g_unit_textured_t& unit)
     {
@@ -245,11 +251,18 @@ namespace owd_lib
         if (batch_->get_vec().size() >= m_max_texture_image_units)
         {
             batches_.push_back(std::make_shared<c_graphic_batch_textured>());
-            batch_ = batches_.back();
-        }
-        batch_->add(unit);
+            auto& batch_new = batches_.back();
 
-        return batch_->get_last_unit().get();
+            batch_new->add(unit);
+            return batch_new->get_last_unit().get();
+        }
+        else
+        {
+            batch_->add(unit);
+
+            return batch_->get_last_unit().get();
+        }
+
     }
     bool c_batch_handler::vertices_exceed(g_batch_t& batch, g_unit_t& unit)
     {

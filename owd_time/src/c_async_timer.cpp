@@ -20,11 +20,11 @@ namespace owd_lib
         m_thread_exists = true;
         m_thread = std::thread(&c_async_timer_lib::do_, this);
     }
-    void c_async_timer_lib::init(uint64_t period_ms)
+    void c_async_timer_lib::init(uint64_t period_mcs)
     {
         terminate();
         m_thread_exists = true;
-        set_period(period_ms);
+        set_period(period_mcs);
         m_thread = std::thread(&c_async_timer_lib::do_, this);
     }
     void c_async_timer_lib::terminate()
@@ -36,9 +36,9 @@ namespace owd_lib
             m_thread.join();
         }
     }
-    void c_async_timer_lib::start(uint64_t period_ms)
+    void c_async_timer_lib::start(uint64_t period_mcs)
     {
-        set_period(period_ms);
+        set_period(period_mcs);
         m_state = enm_state::waiting;
     }
     void c_async_timer_lib::start()
@@ -51,24 +51,23 @@ namespace owd_lib
         {
             if (m_state == enm_state::waiting)
             {
-                ////m_frame_start_time = std::chrono::high_resolution_clock::now();
-                //m_frame_duration_int_ms = 0;
-                //while (true)
-                //{
-                //    ++m_frame_duration_int_ms;
-                //    sleep_();
-                //    /*m_frame_duration_int_ms =
-                //        std::chrono::duration_cast<std::chrono::microseconds>
-                //        (std::chrono::high_resolution_clock::now() - m_frame_start_time).count();*/
+                m_frame_start_time = std::chrono::high_resolution_clock::now();
+               
+                sleep_(m_period_mcs / 1000 - 2);
+                while (true)
+                {
+                    //sleep_();
+                    /*m_frame_duration_int_ms =
+                        std::chrono::duration_cast<std::chrono::microseconds>
+                        (std::chrono::high_resolution_clock::now() - m_frame_start_time).count();*/
 
-                //    if (m_frame_duration_int_ms >= m_period_ms)
-                //    {
-                //        m_state = enm_state::done;
-                //        break;
-                //    }
-                //}
-                sleep_(m_period_ms - 1);
-                std::unique_lock<std::mutex> lck(m_mtx);
+                    if (std::chrono::high_resolution_clock::now() >=
+                        m_frame_start_time + std::chrono::microseconds(static_cast<int32_t>(m_period_mcs)))
+                    {
+                        m_state = enm_state::done;
+                        break;
+                    }
+                }
                 m_state = enm_state::done;
                 m_conditional.notify_all();
             }
@@ -103,7 +102,7 @@ namespace owd_lib
     }
     void c_async_timer_lib::set_period(uint64_t period_ms)
     {
-        m_period_ms.store(period_ms);
+        m_period_mcs.store(period_ms);
     }
 }
 

@@ -14,7 +14,7 @@ namespace owd_lib
 	public:
 		void set_fps(uint64_t fps);
 
-		uint64_t fps(uint64_t fps);
+		float fps();
 
 		float refresh_period_mcs();
 		uint64_t refresh_period_mcs_int();
@@ -71,7 +71,7 @@ namespace owd_lib
 		//c_graphic_renderer* m_renderer_ptr = nullptr;
 		std::recursive_mutex m_draw_mutex{};
 		
-		owd::c_async_timer m_async_timer{};
+		//owd::c_async_timer m_async_timer{};
 
 		void wait_frame(int32_t ms);
 

@@ -5,6 +5,84 @@ namespace owd_lib
 	c_graphic_engine* c_graphic_engine::m_singleton = nullptr;
 	GLint c_graphic_engine::m_max_batch_textures = 2;
 
+	float c_graphic_engine::fps()
+	{
+		return m_window.fps();
+	}
+
+	bool c_graphic_engine::window_should_close()
+	{
+		std::mutex mtx{};
+		std::lock_guard lock(mtx);
+		return glfwWindowShouldClose(m_window.glfw_window());
+	}
+
+	void c_graphic_engine::update_window()
+	{
+		std::mutex mtx{};
+		std::lock_guard lock(mtx);
+		m_state_upd = m_state_upd_frame;
+	}
+
+	void c_graphic_engine::update_entities()
+	{
+		std::mutex mtx{};
+		std::lock_guard lock(mtx);
+		m_state_upd = m_state_upd_frame;
+	}
+
+	void c_graphic_engine::set_entities_wait()
+	{
+		m_wait_entities = true;
+	}
+
+	void c_graphic_engine::set_entities_ready()
+	{
+		m_wait_entities = false;
+		m_cond_wait_entities.notify_all();
+	}
+
+	void c_graphic_engine::set_frame_wait()
+	{
+		m_wait_frame = true;
+	}
+
+	void c_graphic_engine::set_frame_ready()
+	{
+		m_wait_frame = false;
+		m_cond_wait_frame.notify_all();
+	}
+
+	void c_graphic_engine::wait_frame()
+	{
+		std::mutex mtx{};
+		std::unique_lock lock(mtx);
+		m_wait_frame = true;
+		while (true)
+		{
+			if (!m_wait_frame)
+			{
+				break;
+			}
+			m_cond_wait_frame.wait(lock);
+		}
+	}
+
+	void c_graphic_engine::wait_entities()
+	{
+		std::mutex mtx{};
+		std::unique_lock lock(mtx);
+		//m_wait_entities = true;
+		while (true)
+		{
+			if (!m_wait_entities)
+			{
+				break;
+			}
+			m_cond_wait_entities.wait(lock);
+		}
+	}
+
 	std::pair<int32_t, uint32_t> c_graphic_engine::init_opengl()
 	{
 		auto glfw_init_result = glfwInit();
@@ -35,11 +113,67 @@ namespace owd_lib
 
 	void c_graphic_engine::run()
 	{
-		m_logger << "----Running graphic engine START----\n";
+		std::mutex mtx{};
+
+		m_logger << "----Window running----\n";
+		//m_logger << L"----Òåñò ÚúÚúúÚú----\n";
+		auto ttt = timeBeginPeriod(1);
+		//m_frame_start_time = std::chrono::high_resolution_clock::now();
+		while (true)
 		{
-			m_window.run();
+			std::lock_guard lock(mtx);
+			if (glfwWindowShouldClose(m_window.glfw_window()))
+			{
+				m_logger << "----Window closing----\n";
+				//glfwTerminate();
+				break;
+			}
+			else
+			{
+				//default_draw_function();
+				//if (m_state_upd == m_state_idle)
+				//{
+				//}
+				//else if(m_state_upd == m_state_upd_entities)
+				//{
+				//	m_state_upd = m_state_idle;
+				//}
+				//else if (m_state_upd == m_state_upd_frame)
+				//{
+				//	//wait_entities();
+				//	glfwSwapBuffers(m_window.glfw_window());
+				//	glfwPollEvents();
+				//	m_state_upd = m_state_idle;
+				//}
+				//set_frame_ready();
+				//m_draw_mutex.lock();
+				{
+					set_frame_ready();
+					wait_entities();
+					default_draw_function();
+
+					//m_async_timer.wait();
+					//m_frame_end_time = std::chrono::high_resolution_clock::now();
+					//int32_t sleep_ms = (m_frame_end_time - m_frame_start_time).count() / 1000 / m_fps;
+					//Sleep(sleep_ms);
+					/* Swap front and back buffers */
+					//set_frame_wait();
+
+					//m_async_timer.wait();
+					glfwSwapBuffers(m_window.glfw_window());
+
+					/* Poll for and process events */
+					glfwPollEvents();
+					//m_async_timer.start(1000000 / 60);
+					//m_frame_start_time = std::chrono::high_resolution_clock::now();
+					//m_async_timer.start(refresh_period_ms_int());
+					
+				}
+				//m_draw_mutex.unlock();
+				owd::sleep_for_ms(1);
+			}
+			//std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		}
-		m_logger << "----Running graphic engine END----\n";
 	}
 	
 	void c_graphic_engine::set_draw_program(std::function<void()> program)

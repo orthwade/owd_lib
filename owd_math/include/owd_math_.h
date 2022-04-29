@@ -3,6 +3,9 @@
 
 namespace owd
 {
+	float constexpr rand_max_float();
+	float rand(float min, float max);
+
 	float cos_d(float angle_degrees);
 	float sin_d(float angle_degrees);
 

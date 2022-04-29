@@ -5,7 +5,10 @@
 #include <fcntl.h>
 #include <thread>
 #include <mutex>
+#include <vector>
+#include <list>
 
+#include <owd_math.h>
 #include <owd_misc.h>
 #include <owd_strings.h>
 #include <owd_time.h>
@@ -59,39 +62,78 @@ int32_t main()
 			// 4. 3. Load texture from png file.
 			owd::load_texture(L"rsc/textures/a_orange.png", L"A orange");
 
-			// 4. 4. Create textured square.
-			owd::c_graphic_unit unit_t_1{ 0.5f, 0.0f, 0.2f, 0.2f, L"A orange", 2 };
+			// 4. 4. Create 256 textured squares.
 
-			float delta_x = 0.001f;
-			float delta_y = 0.001f;
+			int32_t count_ = 256;
+
+			std::vector<std::shared_ptr<owd::c_graphic_unit>> vec_unit{};
+			
+			for (int32_t i = 0; i != count_; ++i)
+			{
+				float x = owd::rand(-0.9f, 0.9f);
+				float y = owd::rand(-0.9f, 0.9f);
+				auto unit = std::make_shared<owd::c_graphic_unit>(x, y, 0.1f, 0.1f, L"A orange", 2);
+				vec_unit.push_back(unit);
+			}
+			std::vector<owd::xy_t> vec_delta{};
+
+			float delta_x = 1.0f / owd::fps();
+			float delta_y = delta_x;
+
+			for (int32_t i = 0; i != count_; ++i)
+			{
+				vec_delta.push_back({ delta_x, delta_y });
+				auto rand_1 = owd::rand(-1.0f, 1.0f);
+				auto rand_2 = owd::rand(-1.0f, 1.0f);
+				rand_1 /= std::abs(rand_1);
+				rand_2 /= std::abs(rand_1);
+				vec_delta.back().x *= rand_1;
+				vec_delta.back().y *= rand_2;
+			}
+
 			std::mutex mtx{};
+			//while (!owd::window_should_close())
 			while (true)
 			{
 				// 4. 5. Loop and thread will be ended and when GLFW window is closed.
-				std::lock_guard lock(mtx);
+
+				// 4. 6. wait_frame and set_entities to sync screen update().
+				owd::wait_frame();
+				owd::set_entities_wait();
+				//std::lock_guard lock(mtx);
 				if (!running)
 				{
 					break;
 				}
-				auto f_t = unit_t_1.y();
+				for (int32_t i = 0; i != count_; ++i)
+				{
+					auto& unit = vec_unit[i];
+					auto& _x = vec_delta[i].x;
+					auto& _y = vec_delta[i].y;
 
-				if (unit_t_1.y() < -1.0f)
-				{
-					delta_y *= -1;
+					if (unit->y() < -1.0f)
+					{
+						_y *= -1;
+					}
+					else if (unit->y() > 1.0f)
+					{
+						_y *= -1;
+					}
+					if (unit->x() < -1.0f)
+					{
+						_x *= -1;
+					}
+					else if (unit->x() > 1.0f)
+					{
+						_x *= -1;
+					}
+
+					vec_unit[i]->move(vec_delta[i].x, vec_delta[i].y);
 				}
-				else if (unit_t_1.y() > 1.0f)
-				{
-					delta_y *= -1;
-				}
-				if (unit_t_1.x() < -1.0f)
-				{
-					delta_x *= -1;
-				}
-				else if (unit_t_1.x() > 1.0f)
-				{
-					delta_x *= -1;
-				}
-				owd::sleep_for_ms(1); unit_t_1.move(delta_x, delta_y);
+				
+				owd::set_entities_ready();
+				//owd::update_window();
+				//std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			}
 		};
 		// 5. Set thread.
