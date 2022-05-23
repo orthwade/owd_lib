@@ -198,6 +198,8 @@ namespace owd_lib
     }
     void c_batch_handler::draw()
     {
+        std::mutex mtx{};
+        std::lock_guard lock(mtx);
         for (index_t i = 0; i != m_levels.size(); ++i)
         {
             m_shader_coloured->bind();
@@ -209,7 +211,10 @@ namespace owd_lib
 
             for (index_t ii = 0; ii != m_levels[i].batches_textured.size(); ++ii)
             {
-                m_levels[i].batches_textured[ii]->draw();
+                if (m_levels[i].batches_textured[ii])
+                {
+                    m_levels[i].batches_textured[ii]->draw();
+                }
             }
         }
     }

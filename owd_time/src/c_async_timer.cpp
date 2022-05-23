@@ -75,9 +75,7 @@ namespace owd_lib
     }
     void c_async_timer_lib::sleep_(uint64_t ms)
     {
-        #ifdef _WIN32
-        Sleep(ms);
-        #endif // _WIN32
+        sleep_ms(ms);
     }
     void c_async_timer_lib::wait()
     {

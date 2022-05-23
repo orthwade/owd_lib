@@ -6,6 +6,7 @@ namespace owd_lib
 {
 	void key_callback(GLFWwindow* window, int32_t key, int32_t scancode, int32_t action, int32_t mods);
 	void mouse_button_callback(GLFWwindow* window, int32_t button, int32_t action, int32_t mods);
+	//void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 
 	enum class enm_key_state
 	{
@@ -29,10 +30,14 @@ namespace owd_lib
 		inline std::vector<s_key>& keys() { return m_keys; }
 		s_key& get_key(int32_t key_code);
 
+		double mouse_x();
+		double mouse_y();
+
 		static c_input_manager* get_instance();
 		static void terminate();
 
 	protected:
+		
 		std::mutex m_mutex{};
 		std::vector<s_key> m_keys{};
 		static c_input_manager* m_singleton;

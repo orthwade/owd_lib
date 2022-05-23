@@ -15,6 +15,7 @@ namespace owd_lib
 	(GLFWwindow* window, int frame_buffer_width, int frame_buffer_height)
 	{
 		glViewport(0, 0, frame_buffer_width, frame_buffer_height);
+		c_window::get_instance()->resize(frame_buffer_width, frame_buffer_height);
 	}
 	/*void c_window::set_size(uint16_t h, uint16_t w)
 	{
@@ -60,7 +61,7 @@ namespace owd_lib
 	{
 		//m_mtx.lock();
 		{
-			m_logger << "Resizing window: width: " << w << ";    height: " << h << '\n';
+			//m_logger << "Resizing window: width: " << w << ";    height: " << h << '\n';
 
 			m_w = w;
 			m_h = h;
@@ -79,7 +80,7 @@ namespace owd_lib
 
 		m_logger << "----Window running----\n";
 		//m_logger << L"----Òåñò ÚúÚúúÚú----\n";
-		auto ttt = timeBeginPeriod(1);
+		//auto ttt = timeBeginPeriod(1);
 		//m_frame_start_time = std::chrono::high_resolution_clock::now();
 		while (true)
 		{
@@ -166,7 +167,7 @@ namespace owd_lib
 	}
 	void c_window::wait_frame(int32_t ms)
 	{
-		Sleep(ms);
+		//sleep_ms(ms);
 	}
 	c_window::c_window()
     {

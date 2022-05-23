@@ -19,6 +19,16 @@ namespace owd
 		}
 	}
 
+	double mouse_x()
+	{
+		return owd_lib::c_input_manager::get_instance()->mouse_x();
+	}
+
+	double mouse_y()
+	{
+		return owd_lib::c_input_manager::get_instance()->mouse_y();
+	}
+
 	owd::s_key owd::get_key(int32_t key_code)
 	{
 		auto key_ = owd_lib::c_input_manager::get_instance()->get_key(key_code);
@@ -26,7 +36,7 @@ namespace owd
 		auto key_state_ = convert_to_int(key_.state);
 		return { key_code_, key_state_ };
 	}
-
+	
 	void owd::set_key_idle(int32_t key_code)
 	{
 		owd_lib::c_input_manager::get_instance()->get_key(key_code).state = owd_lib::key_idle;

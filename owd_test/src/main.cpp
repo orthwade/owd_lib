@@ -53,14 +53,17 @@ int32_t main()
 		{ 
 			// 4. 1. Create white square
 			owd::c_graphic_unit unit{ 0.0f, 0.1f, 0.2f, 0.2f, 1.0f, 1.0f, 1.0f, 1.0f, 1 };
+			owd::c_graphic_unit unit_0{ 0.0f, 0.0f, 100.0f, 100.0f, 0.8f, 0.8f, 0.8f, 1.0f, 0 };
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
 			// 4. 2. Play sound source
-			sound_1.enable({ L"sample1" });
+			//sound_1.enable({ L"sample1" });
 
 			// 4. 3. Load texture from png file.
 			owd::load_texture(L"rsc/textures/a_orange.png", L"A orange");
+			owd::load_texture(L"rsc/textures/digits/0.png", L"0");
+			owd::load_texture(L"rsc/textures/digits/1.png", L"1");
 
 			// 4. 4. Create 256 textured squares.
 
@@ -72,9 +75,26 @@ int32_t main()
 			{
 				float x = owd::rand(-0.9f, 0.9f);
 				float y = owd::rand(-0.9f, 0.9f);
-				auto unit = std::make_shared<owd::c_graphic_unit>(x, y, 0.1f, 0.1f, L"A orange", 2);
-				vec_unit.push_back(unit);
+				int t = owd::rand(0.0f, 2.9f);
+
+				switch (t)
+				{
+				case 0:
+					vec_unit.push_back(std::make_shared<owd::c_graphic_unit>(x, y, 0.1f, 0.1f, L"A orange", 2));
+					break;
+				case 1:
+					vec_unit.push_back(std::make_shared<owd::c_graphic_unit>(x, y, 0.1f, 0.2f, L"0", 2));
+					break;
+				case 2:
+					vec_unit.push_back(std::make_shared<owd::c_graphic_unit>(x, y, 0.1f, 0.2f, L"1", 2));
+					break;
+				default:
+					vec_unit.push_back(std::make_shared<owd::c_graphic_unit>(x, y, 0.1f, 0.2f, L"0", 2));
+					break;
+				}
+				
 			}
+
 			std::vector<owd::xy_t> vec_delta{};
 
 			float delta_x = 1.0f / owd::fps();
@@ -92,8 +112,8 @@ int32_t main()
 			}
 
 			std::mutex mtx{};
-			//while (!owd::window_should_close())
-			while (true)
+			while (!owd::window_should_close())
+			//while (true)
 			{
 				// 4. 5. Loop and thread will be ended and when GLFW window is closed.
 
@@ -132,6 +152,7 @@ int32_t main()
 				}
 				
 				owd::set_entities_ready();
+				//std::wcout << "X: " << owd::mouse_x() << ";    Y: " << owd::mouse_y() << '\n';
 				//owd::update_window();
 				//std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			}

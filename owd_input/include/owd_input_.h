@@ -7,6 +7,14 @@ namespace owd
 	static constexpr uint8_t key_release	= 1;
 	static constexpr uint8_t key_idle		= 2;
 
+	/// <summary>
+	/// Left mouse button.
+	/// </summary>
+	static constexpr int32_t LMB = 0;
+
+	double mouse_x();
+	double mouse_y();
+
 	static constexpr int32_t key_arrow_up		= 265;
 	static constexpr int32_t key_arrow_down		= 264;
 	static constexpr int32_t key_arrow_left		= 263;

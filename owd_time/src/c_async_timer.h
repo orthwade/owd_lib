@@ -4,12 +4,7 @@
 #include <mutex>
 #include <condition_variable>
 
-#ifdef _WIN32
-#include <Windows.h>
-#pragma comment(lib, "Winmm.lib")
-#else
-#include <>
-#endif // _WIN32
+#include"os_specific_sleep.h"
 
 namespace owd_lib
 {

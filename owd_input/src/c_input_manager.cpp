@@ -39,11 +39,13 @@ namespace owd_lib
 		m_keys.push_back({ key_code, key_release });
 		return m_keys.back();
 	}
+	
 	c_input_manager::c_input_manager()
 	{
 		auto ptr = c_graphic_engine::get_instance();
 		glfwSetKeyCallback(c_window::get_instance()->glfw_window(), key_callback);
 		glfwSetMouseButtonCallback(c_window::get_instance()->glfw_window(), mouse_button_callback);
+		//glfwSetCursorPosCallback(c_window::get_instance()->glfw_window(), cursor_position_callback);
 	}
 	c_input_manager::~c_input_manager()
 	{
@@ -81,4 +83,53 @@ namespace owd_lib
 			key_.state = key_release;
 		}
 	}
+
+	static double m_x{};
+	static double m_y{};
+	double c_input_manager::mouse_x()
+	{
+		std::mutex mtx{};
+		std::lock_guard lock(mtx);
+		auto wnd = c_window::get_instance();
+		glfwGetCursorPos(wnd->glfw_window(), &m_x, &m_y);
+		
+
+		double w = wnd->width();
+		double h = wnd->height();
+		//m_x /= h;
+		//m_y /= h;
+
+		//m_y = 1.0 - m_y;
+		//m_y = m_y * 2.0 - 1.0;
+
+		//m_x = m_x * 2.0 - 1.0;
+
+		m_x = m_x - 0.5 * w;
+		m_x /= (h / 2.0);
+		return m_x;
+	}
+	double c_input_manager::mouse_y()
+	{
+		std::mutex mtx{};
+		std::lock_guard lock(mtx);
+		auto wnd = c_window::get_instance();
+		glfwGetCursorPos(c_window::get_instance()->glfw_window(), &m_x, &m_y);
+		
+		double h = wnd->height();
+		//m_x /= h;
+		m_y /= h;
+
+		m_y = 1.0 - m_y;
+		m_y = m_y * 2.0 - 1.0;
+
+		//m_x = m_x * 2.0 - 1.0;
+		return m_y;
+	}
+	/*void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+	{
+		std::mutex mtx{};
+		std::lock_guard lock(mtx);
+		m_x = xpos;
+		m_y = ypos;
+	}*/
 }

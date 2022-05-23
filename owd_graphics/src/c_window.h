@@ -23,6 +23,8 @@ namespace owd_lib
 
 		inline int64_t refresh_period_ns();
 
+		uint16_t width() { return m_w; }
+		uint16_t height() { return m_h; }
 		void resize(uint16_t w, uint16_t h);
 
 		void run();

@@ -117,7 +117,7 @@ namespace owd_lib
 
 		m_logger << "----Window running----\n";
 		//m_logger << L"----Òåñò ÚúÚúúÚú----\n";
-		auto ttt = timeBeginPeriod(1);
+		//auto ttt = timeBeginPeriod(1);
 		//m_frame_start_time = std::chrono::high_resolution_clock::now();
 		while (true)
 		{
